@@ -1,0 +1,107 @@
+[gd_scene load_steps=15 format=3 uid="uid://cix5tvey8646m"]
+
+[ext_resource type="Texture2D" uid="uid://dhce8rl8bqly5" path="res://textures/basic_bush.png" id="1_uubwc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dmn07"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipuvm"]
+atlas = ExtResource("1_uubwc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgmq6"]
+atlas = ExtResource("1_uubwc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkut1"]
+atlas = ExtResource("1_uubwc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cab20"]
+atlas = ExtResource("1_uubwc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_680t7"]
+atlas = ExtResource("1_uubwc")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxsx7"]
+atlas = ExtResource("1_uubwc")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82pvs"]
+atlas = ExtResource("1_uubwc")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_by6ew"]
+atlas = ExtResource("1_uubwc")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pldcl"]
+atlas = ExtResource("1_uubwc")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fejht"]
+atlas = ExtResource("1_uubwc")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1joh6"]
+atlas = ExtResource("1_uubwc")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gg6vi"]
+animations = [{
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_ipuvm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgmq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkut1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cab20")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_680t7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jxsx7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_82pvs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_by6ew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pldcl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fejht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1joh6")
+}],
+"loop": true,
+"name": &"infected",
+"speed": 6.0
+}]
+
+[node name="Basic Bush" type="StaticBody2D"]
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dmn07")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gg6vi")
+animation = &"infected"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.957067

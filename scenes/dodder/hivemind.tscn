@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddyjeq01es5ll"]
+
+[ext_resource type="Script" path="res://scripts/hivemind.gd" id="1_3arcu"]
+
+[node name="Hivemind" type="Node2D"]
+script = ExtResource("1_3arcu")

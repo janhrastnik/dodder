@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo5cge52r5tdd"]
+
+[ext_resource type="Script" path="res://scripts/map.gd" id="1_a7gl2"]
+[ext_resource type="Texture2D" uid="uid://b153rxorko5bo" path="res://textures/ground_block.png" id="1_dm32u"]
+
+[node name="Map" type="Node2D"]
+script = ExtResource("1_a7gl2")
+
+[node name="Ground" type="Sprite2D" parent="."]
+position = Vector2(64, 64)
+texture = ExtResource("1_dm32u")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(64, 64)
+zoom = Vector2(4, 4)
