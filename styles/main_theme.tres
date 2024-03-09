@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://fje4lduuwwat"]
+
+[ext_resource type="Texture2D" uid="uid://8eqegtptgnqb" path="res://textures/ui/ui_box.png" id="1_g2ywa"]
+[ext_resource type="FontFile" uid="uid://48xdyj0c3v5i" path="res://fonts/Silkscreen-Regular.ttf" id="1_jemqc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6boyf"]
+texture = ExtResource("1_g2ywa")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[resource]
+Label/colors/font_color = Color(0.85, 0.85, 0.85, 1)
+Label/fonts/font = ExtResource("1_jemqc")
+Panel/styles/panel = SubResource("StyleBoxTexture_6boyf")

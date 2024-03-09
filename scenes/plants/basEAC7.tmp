@@ -1,7 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://cix5tvey8646m"]
+[gd_scene load_steps=17 format=3 uid="uid://cix5tvey8646m"]
 
-[ext_resource type="Script" path="res://scripts/basic_bush.gd" id="1_snktt"]
+[ext_resource type="Script" path="res://scenes/plants/basic_bush.gd" id="1_snktt"]
 [ext_resource type="Texture2D" uid="uid://dhce8rl8bqly5" path="res://textures/basic_bush.png" id="1_uubwc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dmn07"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipuvm"]
 atlas = ExtResource("1_uubwc")
@@ -96,44 +98,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_m4iku"]
 radius = 13.0384
 
-[sub_resource type="LabelSettings" id="LabelSettings_2xgj5"]
-font_size = 8
-
-[sub_resource type="Animation" id="Animation_v7fjd"]
-resource_name = "text_popup"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Attach Label:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-35, -10.5), Vector2(-35, -20)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Attach Label:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5351p"]
-_data = {
-"text_popup": SubResource("Animation_v7fjd")
-}
-
-[node name="Area2D" type="Area2D"]
+[node name="Basic Bush" type="StaticBody2D"]
 script = ExtResource("1_snktt")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_dmn07")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gg6vi")
@@ -142,30 +112,27 @@ autoplay = "idle"
 frame = 1
 frame_progress = 0.957067
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_m4iku")
 
 [node name="Attach Label" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0)
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -35.0
+offset_left = -20.0
 offset_top = -10.5
-offset_right = 35.0
+offset_right = 20.0
 offset_bottom = 10.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "Attach [e]"
-label_settings = SubResource("LabelSettings_2xgj5")
-horizontal_alignment = 1
+text = "foobar"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_5351p")
-}
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

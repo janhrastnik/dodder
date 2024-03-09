@@ -1,8 +1,9 @@
 class_name Dodder
 
-extends StaticBody2D
+extends CharacterBody2D
 
 @onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
+var attachable_plant: Node2D = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,3 +30,6 @@ func move_to(click_pos: Vector2):
 		position = point
 		animation_player.play("grow")
 		await get_tree().create_timer(0.3).timeout
+
+func attach():
+	pass

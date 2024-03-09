@@ -4,6 +4,7 @@ const WIDTH = 128
 const HEIGHT = 128
 
 @onready var hivemind: HivemindSingleton = get_node("/root/Hivemind")
+@onready var camera: Camera2D = get_node("Camera2D")
 var dodder: Dodder = null
 
 func _ready():
@@ -19,10 +20,11 @@ func _input(event):
 		if dodder:
 			#print(event.position)
 			dodder.move_to(get_local_mouse_position())
+			camera.slide(get_local_mouse_position())
 
 func spawn_plant_on_random_point(plant_name: String):
 	var plant = load("res://scenes/plants/{name}.tscn".format({name=plant_name}))
-	var plant_instance: StaticBody2D = plant.instantiate()
+	var plant_instance: Area2D = plant.instantiate()
 	
 	var rng = RandomNumberGenerator.new()
 	var x = rng.randi_range(0, WIDTH)

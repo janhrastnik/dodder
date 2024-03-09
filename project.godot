@@ -24,6 +24,10 @@ Hivemind="*res://scenes/dodder/hivemind.tscn"
 window/stretch/mode="viewport"
 window/stretch/aspect="ignore"
 
+[gui]
+
+theme/custom="res://styles/main_theme.tres"
+
 [input]
 
 click={

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dcg86siwtckx"]
+[gd_scene load_steps=10 format=3 uid="uid://dcg86siwtckx"]
 
 [ext_resource type="Script" path="res://scripts/dodder.gd" id="1_ekut6"]
 [ext_resource type="Texture2D" uid="uid://bqf5524l5qtt2" path="res://textures/starting_fungus.png" id="1_lkqru"]
@@ -20,22 +20,6 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfisx"]
 
-[sub_resource type="Animation" id="Animation_egr6o"]
-resource_name = "shrink"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_jp0cv"]
 resource_name = "grow"
 length = 0.3
@@ -52,13 +36,32 @@ tracks/0/keys = {
 "values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_egr6o"]
+resource_name = "shrink"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_floy7"]
 _data = {
 "grow": SubResource("Animation_jp0cv"),
 "shrink": SubResource("Animation_egr6o")
 }
 
-[node name="Dodder" type="StaticBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_fj8pt"]
+radius = 13.0
+
+[node name="Dodder" type="CharacterBody2D"]
 script = ExtResource("1_ekut6")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -71,3 +74,8 @@ shape = SubResource("RectangleShape2D_vfisx")
 libraries = {
 "": SubResource("AnimationLibrary_floy7")
 }
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_fj8pt")

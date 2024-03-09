@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/map.gd" id="1_a7gl2"]
 [ext_resource type="Texture2D" uid="uid://b153rxorko5bo" path="res://textures/ground_block.png" id="1_dm32u"]
+[ext_resource type="PackedScene" uid="uid://dn513vu177gop" path="res://scenes/ui/ui_test.tscn" id="3_a4qvv"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="3_lde8x"]
-[ext_resource type="PackedScene" uid="uid://6tv40q4iw0ue" path="res://scenes/ui/dodder_ui.tscn" id="4_yy8mp"]
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_a7gl2")
@@ -17,4 +17,4 @@ position = Vector2(64, 64)
 zoom = Vector2(4, 4)
 script = ExtResource("3_lde8x")
 
-[node name="Dodder UI" parent="." instance=ExtResource("4_yy8mp")]
+[node name="UI Test" parent="." instance=ExtResource("3_a4qvv")]
