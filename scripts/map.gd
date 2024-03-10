@@ -1,11 +1,14 @@
 extends Node2D
 
-const WIDTH = 128
+## Trenutno je to node za map. Zaenkrat tukaj spawnamo stvari,
+## in handlamo click event za premik dodderja.
+
+const WIDTH = 128 # potrebno za spawning
 const HEIGHT = 128
 
-@onready var hivemind: HivemindSingleton = get_node("/root/Hivemind")
+@onready var hivemind: HivemindSingleton = get_node("/root/Hivemind") # global gamedata
 @onready var camera: Camera2D = get_node("Camera2D")
-var dodder: Dodder = null
+var dodder: Dodder = null # the player
 
 func _ready():
 	spawn_plant_on_random_point("basic_bush")

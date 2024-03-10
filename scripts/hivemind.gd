@@ -2,7 +2,11 @@ class_name HivemindSingleton
 
 extends Node2D
 
-var nutrients = 0
+## Global gamedata class. Tuki shranjujemo progress v igri.
+
+var nutrients = 0 # victory points
+var is_attached = false
+var attached_plant = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
