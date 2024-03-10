@@ -25,9 +25,13 @@ func _input(event):
 		if dodder:
 			#print(event.position)
 			var pos = get_local_mouse_position()
-			dodder.move_to(pos)
-			camera.slide(pos)
+			#dodder.move_to(pos)
+			#camera.slide(pos)
 			click_animation(pos)
+
+func move_cam(pos : Vector2) -> void:
+	camera.slide(pos)
+	
 
 func spawn_plant_on_random_point(plant_name: String):
 	var plant = load("res://scenes/plants/{name}.tscn".format({name=plant_name}))

@@ -1,21 +1,35 @@
 class_name Dodder
-
 extends CharacterBody2D
 
 ## To je class za dodder, ki se premika naokrog in ni attached na ničemer.
-
 @onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
 @onready var hivemind: HivemindSingleton = get_node("/root/Hivemind")
-var attachable_plant: Node2D = null # TODO: kasneje bi mel tuki nek base Plant class type
 
-func _ready():
-	pass # Replace with function body.
+var nutrients : int = 0
+var plant: Plant = null 
+
+var state = States.Detached
+enum States {
+	Attached,
+	Detached
+}
+
+func _input(event):
+	if event.is_action_pressed("click") and state == States.Detached:
+		var p = get_global_mouse_position()
+		move_to(p)
+		get_parent().move_cam(p)
 
 func _process(delta):
-	if Input.is_action_just_pressed("attach"):
-		if attachable_plant:
-			attach()
-
+	match state:
+		States.Detached:
+			if Input.is_action_just_pressed("attach") and plant:
+				attach()
+		
+		States.Attached:
+			if Input.is_action_just_pressed("detach") and plant:
+				detach()
+	
 ## Fancy movement funkcija. vzame razdaljo med klikom in trenutno pozicijo,
 ## določi vmesne korake za "animacijo", in se postopoma premakne po teh korakih.
 ## Vzamemo en korak na vsakih 32 pikslov razdalje.
@@ -24,9 +38,11 @@ func move_to(click_pos: Vector2):
 	var dist = diff.length()
 	var step_count = int(dist / 32) # število vmesnih korakov
 	var steps = []
+	
 	for i in range(1, step_count+1):
 		steps.append(position + diff.normalized()*32*i)
 	steps.append(click_pos)
+	
 	while !steps.is_empty():
 		var point = steps.pop_front()
 		animation_player.play("shrink")
@@ -38,15 +54,34 @@ func move_to(click_pos: Vector2):
 ## dodder se attacha na plant. Zbrišemo ta physical dodder entity. 
 ## V hivemind singleton (naš globalni gamedata) shranimo spremembo.
 func attach():
-	var attached_dodder = load("res://scenes/dodder/attached_dodder.tscn")
-	var attached_dodder_instance: Node2D = attached_dodder.instantiate()
-	attached_dodder_instance.attached_plant = attachable_plant
-	get_parent().add_child(attached_dodder_instance)
+	plant.attach(self)
 	
-	attachable_plant.attach()
-	hivemind.is_attached = true
-	hivemind.attached_plant = attachable_plant
-	get_parent().dodder = null
-	get_parent().dodder_attached_event()
-	get_parent().get_node("Camera2D").slide(attachable_plant.position)
-	queue_free()
+	set_colisions_disabled(true)
+	
+	state = States.Attached
+	visible = false
+	
+	get_parent().move_cam(plant.position)
+
+func detach():
+	plant.detach()
+	
+	set_colisions_disabled(false)
+	
+	state = States.Detached
+	position = plant.position + Vector2(0, 15)
+	visible = true
+
+	get_parent().move_cam(position)
+
+func gain_nutrients(amount : int) -> void:
+	nutrients += amount
+	print(nutrients)
+
+func set_colisions_disabled(b : bool) -> void:
+	$CollisionShape2D.disabled = b
+	$Area2D/CollisionShape2D.disabled = b
+
+func _on_area_2d_area_entered(area):
+	if area is Plant:
+		plant = area

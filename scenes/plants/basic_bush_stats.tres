@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlantStats" load_steps=2 format=3 uid="uid://dxb6xb6ppv2sr"]
+
+[ext_resource type="Script" path="res://scripts/plant_stat_resource.gd" id="1_ya6q8"]
+
+[resource]
+script = ExtResource("1_ya6q8")
+name = "Foobar"
+nutrients = 10
+dna = 5

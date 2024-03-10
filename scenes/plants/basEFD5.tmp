@@ -258,9 +258,6 @@ stretch_mode = 2
 [node name="QuicktimeTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="QuicktimeStartTimer" type="Timer" parent="."]
-
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="timeout" from="QuicktimeTimer" to="." method="_on_quicktime_timer_timeout"]
-[connection signal="timeout" from="QuicktimeStartTimer" to="." method="_on_quicktime_start_timer_timeout"]

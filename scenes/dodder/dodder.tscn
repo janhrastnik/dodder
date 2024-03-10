@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://scripts/dodder.gd" id="1_ekut6"]
 [ext_resource type="Texture2D" uid="uid://bqf5524l5qtt2" path="res://textures/starting_fungus.png" id="1_lkqru"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rv3eq"]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_5wmoc"]
 atlas = ExtResource("1_lkqru")
 region = Rect2(0, 0, 32, 32)
@@ -17,8 +19,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vfisx"]
 
 [sub_resource type="Animation" id="Animation_jp0cv"]
 resource_name = "grow"
@@ -64,18 +64,22 @@ radius = 13.0
 [node name="Dodder" type="CharacterBody2D"]
 script = ExtResource("1_ekut6")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_k1nnl")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rv3eq")
 
-[node name="Shape" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_vfisx")
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+sprite_frames = SubResource("SpriteFrames_k1nnl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_floy7")
 }
+autoplay = "grow"
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_fj8pt")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
