@@ -1,9 +1,46 @@
-[gd_scene load_steps=5 format=3 uid="uid://bo5cge52r5tdd"]
+[gd_scene load_steps=11 format=3 uid="uid://bo5cge52r5tdd"]
 
 [ext_resource type="Script" path="res://scripts/map.gd" id="1_a7gl2"]
 [ext_resource type="Texture2D" uid="uid://b153rxorko5bo" path="res://textures/ground_block.png" id="1_dm32u"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="3_lde8x"]
 [ext_resource type="PackedScene" uid="uid://6tv40q4iw0ue" path="res://scenes/ui/dodder_ui.tscn" id="4_yy8mp"]
+[ext_resource type="Texture2D" uid="uid://blc7qjosuq3a5" path="res://textures/ui/click_circle.png" id="5_v68f6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ff654"]
+atlas = ExtResource("5_v68f6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgyv0"]
+atlas = ExtResource("5_v68f6")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idmfn"]
+atlas = ExtResource("5_v68f6")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwon0"]
+atlas = ExtResource("5_v68f6")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bbv52"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ff654")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgyv0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idmfn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwon0")
+}],
+"loop": false,
+"name": &"click",
+"speed": 10.0
+}]
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_a7gl2")
@@ -18,3 +55,10 @@ zoom = Vector2(4, 4)
 script = ExtResource("3_lde8x")
 
 [node name="Dodder UI" parent="." instance=ExtResource("4_yy8mp")]
+
+[node name="Click Circle" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_bbv52")
+animation = &"click"
+
+[connection signal="animation_finished" from="Click Circle" to="." method="_on_click_circle_animation_finished"]

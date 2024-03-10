@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://6tv40q4iw0ue"]
+[gd_scene load_steps=2 format=3 uid="uid://6tv40q4iw0ue"]
+
+[ext_resource type="Script" path="res://scripts/dodder_ui.gd" id="1_12od8"]
 
 [node name="Dodder UI" type="CanvasLayer"]
+script = ExtResource("1_12od8")
 
 [node name="Panel" type="Panel" parent="."]
 anchors_preset = 2
@@ -8,7 +11,7 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
 offset_top = -210.0
-offset_right = 376.0
+offset_right = 287.0
 offset_bottom = -10.0
 grow_vertical = 0
 
@@ -16,9 +19,24 @@ grow_vertical = 0
 layout_mode = 0
 offset_left = 23.0
 offset_top = 22.0
-offset_right = 342.0
+offset_right = 253.0
 offset_bottom = 176.0
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Nutrients: 0"
+
+[node name="Detach Label" type="Label" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -133.0
+offset_top = -48.0
+offset_right = 133.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press spacebar to detach"

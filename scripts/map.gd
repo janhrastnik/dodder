@@ -8,6 +8,8 @@ const HEIGHT = 128
 
 @onready var hivemind: HivemindSingleton = get_node("/root/Hivemind") # global gamedata
 @onready var camera: Camera2D = get_node("Camera2D")
+@onready var dodder_ui: CanvasLayer = get_node("Dodder UI")
+@onready var click_circle: AnimatedSprite2D = get_node("Click Circle")
 var dodder: Dodder = null # the player
 
 func _ready():
@@ -22,8 +24,10 @@ func _input(event):
 	if event.is_action_pressed("click"):
 		if dodder:
 			#print(event.position)
-			dodder.move_to(get_local_mouse_position())
-			camera.slide(get_local_mouse_position())
+			var pos = get_local_mouse_position()
+			dodder.move_to(pos)
+			camera.slide(pos)
+			click_animation(pos)
 
 func spawn_plant_on_random_point(plant_name: String):
 	var plant = load("res://scenes/plants/{name}.tscn".format({name=plant_name}))
@@ -45,3 +49,18 @@ func spawn_baby_dodder():
 	dodder = dodder_instance
 	
 	add_child(dodder_instance)
+
+func click_animation(loc: Vector2):
+	click_circle.position = loc
+	click_circle.visible = true
+	click_circle.play("click")
+
+func _on_click_circle_animation_finished():
+	click_circle.stop()
+	click_circle.visible = false
+
+func dodder_attached_event():
+	dodder_ui.show_detach_label()
+
+func dodder_detached_event():
+	dodder_ui.hide_detach_label()

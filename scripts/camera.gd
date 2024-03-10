@@ -16,7 +16,5 @@ func _process(delta):
 func slide(to: Vector2):
 	await get_tree().create_timer(0.2).timeout
 	var quotient = (to - position).length()
-	print(to)
-	print(quotient)
 	position_smoothing_speed = quotient / 20
 	set_position(to)

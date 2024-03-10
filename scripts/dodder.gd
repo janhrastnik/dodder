@@ -38,8 +38,15 @@ func move_to(click_pos: Vector2):
 ## dodder se attacha na plant. Zbrišemo ta physical dodder entity. 
 ## V hivemind singleton (naš globalni gamedata) shranimo spremembo.
 func attach():
+	var attached_dodder = load("res://scenes/dodder/attached_dodder.tscn")
+	var attached_dodder_instance: Node2D = attached_dodder.instantiate()
+	attached_dodder_instance.attached_plant = attachable_plant
+	get_parent().add_child(attached_dodder_instance)
+	
 	attachable_plant.attach()
 	hivemind.is_attached = true
 	hivemind.attached_plant = attachable_plant
+	get_parent().dodder = null
+	get_parent().dodder_attached_event()
 	get_parent().get_node("Camera2D").slide(attachable_plant.position)
 	queue_free()
