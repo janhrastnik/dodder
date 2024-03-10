@@ -95,6 +95,7 @@ func attach(d : Dodder):
 	sprite.animation = "infected"
 
 func detach():
+	qte_stop() # If in qte
 	quicktime_start_timer.stop()
 	qte_display.visible = false
 	

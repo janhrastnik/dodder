@@ -13,7 +13,7 @@ const HEIGHT = 128
 var dodder: Dodder = null # the player
 
 func _ready():
-	spawn_plant_on_random_point("basic_bush")
+	#spawn_plant_on_random_point("basic_bush")
 	spawn_baby_dodder()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
