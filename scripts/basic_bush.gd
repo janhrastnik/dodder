@@ -7,7 +7,6 @@ extends Plant
 ## kot so nutrients in dna (abilities).
 
 # plant stats
-@export var stats = PlantStats
 var dodder : Dodder = null
 
 @onready var attach_label: Label = get_node("Attach Label") # ui indikator
@@ -33,7 +32,7 @@ func qte_stop():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	initialize_stats(stats)
+	super()
 	attach_label.text = "{plant_name}\nAttach [e]".format({plant_name=plant_name})
 
 func _on_body_entered(body):

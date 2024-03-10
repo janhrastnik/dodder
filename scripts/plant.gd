@@ -1,10 +1,11 @@
 class_name Plant
 extends Node
 
+@export var stats : PlantStats
 var plant_name : String
 var nutrients : int
 
-func initialize_stats(stats : PlantStats) -> void:
+func _ready() -> void:
 	plant_name = stats.name
 	nutrients = stats.nutrients
 	
