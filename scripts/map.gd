@@ -63,8 +63,12 @@ func _on_click_circle_animation_finished():
 	click_circle.stop()
 	click_circle.visible = false
 
+## Tukaj osvežimo par ui elementov
 func dodder_attached_event():
-	dodder_ui.show_detach_label()
+	dodder_ui.attached_event()
 
 func dodder_detached_event():
-	dodder_ui.hide_detach_label()
+	dodder_ui.detached_event()
+
+func refresh_nutrient_count(nutrients: int):
+	dodder_ui.refresh_nutrient_count(nutrients)

@@ -62,6 +62,7 @@ func attach():
 	visible = false
 	
 	get_parent().move_cam(plant.position)
+	get_parent().dodder_attached_event()
 
 func detach():
 	plant.detach()
@@ -73,10 +74,11 @@ func detach():
 	visible = true
 
 	get_parent().move_cam(position)
+	get_parent().dodder_detached_event()
 
 func gain_nutrients(amount : int) -> void:
 	nutrients += amount
-	print(nutrients)
+	get_parent().refresh_nutrient_count(nutrients)
 
 func set_colisions_disabled(b : bool) -> void:
 	$CollisionShape2D.disabled = b

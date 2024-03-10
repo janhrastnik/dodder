@@ -11,8 +11,11 @@ func _ready():
 func _process(delta):
 	pass
 
-func show_detach_label():
+func attached_event():
 	detach_label.visible = true
-	
-func hide_detach_label():
+
+func detached_event():
 	detach_label.visible = false
+
+func refresh_nutrient_count(nutrients: int):
+	get_node("Panel/VBoxContainer/Label").text = "Nutrients: {count}".format({count=nutrients})

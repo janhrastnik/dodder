@@ -1,9 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://cix5tvey8646m"]
+[gd_scene load_steps=43 format=3 uid="uid://cix5tvey8646m"]
 
 [ext_resource type="Script" path="res://scripts/basic_bush.gd" id="1_snktt"]
 [ext_resource type="Texture2D" uid="uid://dhce8rl8bqly5" path="res://textures/basic_bush.png" id="1_uubwc"]
 [ext_resource type="Resource" uid="uid://dxb6xb6ppv2sr" path="res://scenes/plants/basic_bush_stats.tres" id="2_6d83d"]
 [ext_resource type="Texture2D" uid="uid://wfevw71pi6qg" path="res://textures/nutrient.png" id="3_484ba"]
+[ext_resource type="Texture2D" uid="uid://cm7q25w4m6qqy" path="res://textures/ui/qtebutton.png" id="5_0hk4t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipuvm"]
 atlas = ExtResource("1_uubwc")
@@ -172,11 +173,163 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_p87ho"]
+resource_name = "harvest_popup"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Harvest Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-34, -30), Vector2(-34, -50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Harvest Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hfwxb"]
 _data = {
 "RESET": SubResource("Animation_c4acb"),
+"harvest_popup": SubResource("Animation_p87ho"),
 "text_popup": SubResource("Animation_nj6eq")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3nph"]
+atlas = ExtResource("5_0hk4t")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_neg8h"]
+atlas = ExtResource("5_0hk4t")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nx36"]
+atlas = ExtResource("5_0hk4t")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1pve"]
+atlas = ExtResource("5_0hk4t")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u2xkd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3nph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_neg8h")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nx36")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1pve")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvfn8"]
+atlas = ExtResource("5_0hk4t")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odyid"]
+atlas = ExtResource("5_0hk4t")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwk6x"]
+atlas = ExtResource("5_0hk4t")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2fla"]
+atlas = ExtResource("5_0hk4t")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_upos5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvfn8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odyid")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwk6x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2fla")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s882n"]
+atlas = ExtResource("5_0hk4t")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjoyf"]
+atlas = ExtResource("5_0hk4t")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_up8fb"]
+atlas = ExtResource("5_0hk4t")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_184ip"]
+atlas = ExtResource("5_0hk4t")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h6prt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s882n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjoyf")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_up8fb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_184ip")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
 
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_snktt")
@@ -238,9 +391,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -34.0
-offset_top = -16.0
+offset_top = -40.0
 offset_right = 34.0
-offset_bottom = 16.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = -8
@@ -259,6 +412,57 @@ stretch_mode = 2
 one_shot = true
 
 [node name="QuicktimeStartTimer" type="Timer" parent="."]
+
+[node name="QTE Container" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = 20.0
+offset_right = 52.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="One" type="Control" parent="QTE Container"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="One Button" type="AnimatedSprite2D" parent="QTE Container/One"]
+sprite_frames = SubResource("SpriteFrames_u2xkd")
+animation = &"idle"
+autoplay = "idle"
+centered = false
+
+[node name="Two" type="Control" parent="QTE Container"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Two Button" type="AnimatedSprite2D" parent="QTE Container/Two"]
+sprite_frames = SubResource("SpriteFrames_upos5")
+animation = &"idle"
+autoplay = "idle"
+centered = false
+
+[node name="Three" type="Control" parent="QTE Container"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Three Button" type="AnimatedSprite2D" parent="QTE Container/Three"]
+sprite_frames = SubResource("SpriteFrames_h6prt")
+animation = &"idle"
+autoplay = "idle"
+centered = false
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
