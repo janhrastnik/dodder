@@ -4,6 +4,7 @@ extends CharacterBody2D
 ## To je class za dodder, ki se premika naokrog in ni attached na ničemer.
 @onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
 @onready var hivemind: HivemindSingleton = get_node("/root/Hivemind")
+@onready var step_sound: AudioStreamPlayer = get_node("StepSound")
 
 var nutrients : int = 0
 var plant: Plant = null 
@@ -48,6 +49,7 @@ func move_to(click_pos: Vector2):
 		animation_player.play("shrink")
 		await get_tree().create_timer(0.3).timeout # počakamo da se animacija zaključi, preden se premaknemo
 		position = point
+		step_sound.play()
 		animation_player.play("grow")
 		await get_tree().create_timer(0.3).timeout
 

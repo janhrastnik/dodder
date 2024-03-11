@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcg86siwtckx"]
+[gd_scene load_steps=11 format=3 uid="uid://dcg86siwtckx"]
 
 [ext_resource type="Script" path="res://scripts/dodder.gd" id="1_ekut6"]
 [ext_resource type="Texture2D" uid="uid://bqf5524l5qtt2" path="res://textures/starting_fungus.png" id="1_lkqru"]
+[ext_resource type="AudioStream" uid="uid://b5trgaaasa7p8" path="res://audio/sfx/Move.wav" id="3_hr5oc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rv3eq"]
 
@@ -81,5 +82,9 @@ autoplay = "grow"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_fj8pt")
+
+[node name="StepSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_hr5oc")
+volume_db = -12.0
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

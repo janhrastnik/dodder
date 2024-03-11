@@ -17,6 +17,8 @@ var dodder : Dodder = null
 @onready var quicktime_start_timer : Timer = get_node("QuicktimeStartTimer")
 @onready var qte_display : HBoxContainer = get_node("QTE Container")
 @onready var harvest_label: HBoxContainer = get_node("Harvest Label")
+@onready var shake_sound: AudioStreamPlayer = get_node("ShakeSound")
+@onready var harvest_sound: AudioStreamPlayer = get_node("HarvestSound")
 
 # qte številka ki jo player mora pritisnit
 var qte_prompt = null
@@ -31,9 +33,13 @@ func _input(event):
 	or (event.is_action_pressed("QTE2") and qte_prompt == 2) \
 	or (event.is_action_pressed("QTE3") and qte_prompt == 3)) \
 	and not quicktime_timer.is_stopped():
-		dodder.gain_nutrients(1)
-		qte_stop()
-		show_harvest_label()
+		qte_success()
+
+func qte_success():
+	harvest_sound.play()
+	dodder.gain_nutrients(1)
+	qte_stop()
+	show_harvest_label()
 
 func qte_start():
 	var rng = RandomNumberGenerator.new()
@@ -91,6 +97,7 @@ func attach(d : Dodder):
 	quicktime_start_timer.start()
 	
 	animation_player.play("shake")
+	shake_sound.play()
 	await get_tree().create_timer(0.1).timeout
 	sprite.animation = "infected"
 
@@ -100,6 +107,7 @@ func detach():
 	qte_display.visible = false
 	
 	animation_player.play("shake")
+	shake_sound.play()
 	await get_tree().create_timer(0.1).timeout
 	sprite.animation = "idle"
 

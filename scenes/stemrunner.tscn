@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://400qin8ypn3m"]
+
+[ext_resource type="Texture2D" uid="uid://ds4no3g77c5us" path="res://textures/stemrunner/test_visited4x.png" id="1_wh3ao"]
+
+[node name="Stemrunner" type="CanvasLayer"]
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+texture = ExtResource("1_wh3ao")

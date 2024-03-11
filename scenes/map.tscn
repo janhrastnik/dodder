@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bo5cge52r5tdd"]
+[gd_scene load_steps=14 format=3 uid="uid://bo5cge52r5tdd"]
 
 [ext_resource type="Script" path="res://scripts/map.gd" id="1_a7gl2"]
 [ext_resource type="Texture2D" uid="uid://b153rxorko5bo" path="res://textures/ground_block.png" id="1_dm32u"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://blc7qjosuq3a5" path="res://textures/ui/click_circle.png" id="5_v68f6"]
 [ext_resource type="PackedScene" uid="uid://cwbej7jwbypke" path="res://scenes/spawn_areas/spawn_area.tscn" id="6_tra6f"]
 [ext_resource type="PackedScene" uid="uid://cix5tvey8646m" path="res://scenes/plants/basic_bush.tscn" id="7_qb58n"]
+[ext_resource type="PackedScene" uid="uid://cwhj4gnuuceo4" path="res://scenes/plants/fancy_bush.tscn" id="8_7woyy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ff654"]
 atlas = ExtResource("5_v68f6")
@@ -68,5 +69,8 @@ position = Vector2(64, 64)
 plant = ExtResource("7_qb58n")
 amount = 100
 radius = 30
+
+[node name="Fancy Bush" parent="." instance=ExtResource("8_7woyy")]
+position = Vector2(163, 147)
 
 [connection signal="animation_finished" from="Click Circle" to="." method="_on_click_circle_animation_finished"]
