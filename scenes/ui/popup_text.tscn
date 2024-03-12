@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://buy1pqe1ea4qt"]
 
-[ext_resource type="Texture2D" uid="uid://wfevw71pi6qg" path="res://textures/nutrient.png" id="1_50m1e"]
+[ext_resource type="Texture2D" uid="uid://be6b5m03l17ib" path="res://textures/nutrient2.png" id="1_2fdoj"]
 
 [sub_resource type="Animation" id="Animation_1370v"]
 resource_name = "text_popup"
@@ -93,12 +93,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -34.0
-offset_top = -50.0
+offset_top = -16.0
 offset_right = 34.0
-offset_bottom = -18.0
+offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = -8
 alignment = 1
 
 [node name="Label" type="Label" parent="Harvest Label"]
@@ -106,6 +105,7 @@ layout_mode = 2
 text = "+1"
 
 [node name="Nutrient Image" type="TextureRect" parent="Harvest Label"]
+custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
-texture = ExtResource("1_50m1e")
-stretch_mode = 2
+texture = ExtResource("1_2fdoj")
+stretch_mode = 3
