@@ -15,6 +15,9 @@ enum States {
 	Detached
 }
 
+# hack, to know when to not display the dodder ui info label
+var areacount = 0
+
 func _ready():
 	get_parent().refresh_nutrient_count(nutrients)
 
@@ -80,7 +83,7 @@ func detach():
 	visible = true
 
 	get_parent().move_cam(position)
-	get_parent().dodder_detached_event()
+	#get_parent().dodder_hide_info_text()
 
 func change_nutrients(amount : int) -> void:
 	nutrients += amount
@@ -93,3 +96,10 @@ func set_colisions_disabled(b : bool) -> void:
 func _on_area_2d_area_entered(area):
 	if area is Plant:
 		plant = area
+	get_parent().dodder_attachable_event()
+	areacount += 1
+
+func _on_area_2d_area_exited(area):
+	areacount -= 1
+	if areacount == 0 and state == States.Detached:
+		get_parent().dodder_hide_info_text()

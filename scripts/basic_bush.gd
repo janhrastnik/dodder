@@ -6,17 +6,13 @@ extends Plant
 ## Na plants se lahko attacha dodder in potem od njih pobira stvari,
 ## kot so nutrients in dna (abilities).
 
-# plant stats
-var dodder : Dodder = null
-
-@onready var attach_label: Label = get_node("Attach Label") # ui indikator
+#@onready var attach_label: Label = get_node("Attach Label")
 @onready var sprite: AnimatedSprite2D = get_node("Sprite")
 @onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
 @onready var label_animation_player: AnimationPlayer = get_node("LabelAnimationPlayer")
 @onready var quicktime_timer : Timer = get_node("QuicktimeTimer")
 @onready var quicktime_start_timer : Timer = get_node("QuicktimeStartTimer")
 @onready var qte_display : HBoxContainer = get_node("QTE Container")
-@onready var harvest_label: HBoxContainer = get_node("Harvest Label")
 @onready var shake_sound: AudioStreamPlayer = get_node("ShakeSound")
 @onready var harvest_sound: AudioStreamPlayer = get_node("HarvestSound")
 @onready var qte_indicator_sound: AudioStreamPlayer = get_node("QTEindicatorSound")
@@ -40,7 +36,7 @@ func qte_success():
 	harvest_sound.play()
 	dodder.change_nutrients(1)
 	qte_stop()
-	show_harvest_label()
+	show_harvest()
 
 func qte_start():
 	qte_indicator_sound.play()
@@ -65,7 +61,6 @@ func qte_start():
 func qte_stop():
 	quicktime_timer.stop()
 	qte_prompt = null
-	print("stopped!")
 	
 	var one: AnimatedSprite2D = qte_display.get_node("One/One Button")
 	one.set_frame(0)
@@ -80,20 +75,21 @@ func qte_stop():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super()
-	attach_label.text = "{plant_name}\nAttach [e]".format({plant_name=plant_name})
+	#attach_label.text = "{plant_name}\nAttach [e]".format({plant_name=plant_name})
 	rng.randomize()
 
 func _on_body_entered(body):
 	if body is Dodder:
-		attach_label.visible = true
-		label_animation_player.play("text_popup")
+		show_popup_text()
 
 func _on_body_exited(body):
 	if body is Dodder:
-		attach_label.visible = false
+		hide_popup_text()
+		pass
 
 ## Predvaja animacijo, ko se dodder attacha gor na plant.
 func attach(d : Dodder):
+	super(d)
 	dodder = d
 	qte_display.visible = true
 	quicktime_start_timer.start()
@@ -125,9 +121,3 @@ func _on_quicktime_start_timer_timeout():
 			qte_countdown = rng.randi_range(1, 5)
 		else:
 			qte_countdown -= 1
-
-func show_harvest_label():
-	harvest_label.visible = true
-	label_animation_player.play("harvest_popup")
-	await get_tree().create_timer(0.5).timeout
-	harvest_label.visible = false

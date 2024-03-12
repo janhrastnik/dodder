@@ -26,8 +26,7 @@ offset_bottom = 176.0
 layout_mode = 2
 text = "Nutrients: 0"
 
-[node name="Detach Label" type="Label" parent="."]
-visible = false
+[node name="Info Label" type="Label" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -39,4 +38,5 @@ offset_right = 133.0
 offset_bottom = -27.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Press spacebar to detach"
+horizontal_alignment = 1
+vertical_alignment = 1

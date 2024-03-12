@@ -67,8 +67,11 @@ func _on_click_circle_animation_finished():
 func dodder_attached_event():
 	dodder_ui.attached_event()
 
-func dodder_detached_event():
-	dodder_ui.detached_event()
+func dodder_attachable_event():
+	dodder_ui.attachable_event()
+
+func dodder_hide_info_text():
+	dodder_ui.hide_info_text()
 
 func refresh_nutrient_count(nutrients: int):
 	dodder_ui.refresh_nutrient_count(nutrients)

@@ -1,9 +1,8 @@
-[gd_scene load_steps=46 format=3 uid="uid://cix5tvey8646m"]
+[gd_scene load_steps=40 format=3 uid="uid://cix5tvey8646m"]
 
 [ext_resource type="Script" path="res://scripts/basic_bush.gd" id="1_snktt"]
 [ext_resource type="Texture2D" uid="uid://dhce8rl8bqly5" path="res://textures/basic_bush.png" id="1_uubwc"]
 [ext_resource type="Resource" uid="uid://dxb6xb6ppv2sr" path="res://scenes/plants/basic_bush_stats.tres" id="2_6d83d"]
-[ext_resource type="Texture2D" uid="uid://wfevw71pi6qg" path="res://textures/nutrient.png" id="3_484ba"]
 [ext_resource type="Texture2D" uid="uid://cm7q25w4m6qqy" path="res://textures/ui/qtebutton.png" id="5_0hk4t"]
 [ext_resource type="AudioStream" uid="uid://fe6dxe2wu0a4" path="res://audio/sfx/bush shake 2.wav" id="6_fxqeb"]
 [ext_resource type="AudioStream" uid="uid://cfdyymi4nsl5n" path="res://audio/sfx/Nutrient.wav" id="7_ndjl4"]
@@ -102,15 +101,6 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_m4iku"]
 radius = 13.0384
 
-[sub_resource type="LabelSettings" id="LabelSettings_2xgj5"]
-font_size = 8
-
-[sub_resource type="LabelSettings" id="LabelSettings_w885g"]
-font_size = 8
-
-[sub_resource type="Animation" id="Animation_7ecov"]
-length = 0.001
-
 [sub_resource type="Animation" id="Animation_b3st1"]
 resource_name = "shake"
 length = 0.3
@@ -129,86 +119,16 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5351p"]
 _data = {
-"RESET": SubResource("Animation_7ecov"),
 "shake": SubResource("Animation_b3st1")
-}
-
-[sub_resource type="Animation" id="Animation_c4acb"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Attach Label:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_p87ho"]
 resource_name = "harvest_popup"
 length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Harvest Label:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-34, -30), Vector2(-34, -50)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Harvest Label:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_nj6eq"]
-resource_name = "text_popup"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Attach Label:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-70, -10), Vector2(-70, -35)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Attach Label:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hfwxb"]
 _data = {
-"RESET": SubResource("Animation_c4acb"),
-"harvest_popup": SubResource("Animation_p87ho"),
-"text_popup": SubResource("Animation_nj6eq")
+"harvest_popup": SubResource("Animation_p87ho")
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b3nph"]
@@ -334,7 +254,7 @@ animations = [{
 "speed": 2.0
 }]
 
-[node name="Area2D" type="Area2D"]
+[node name="BasicBush" type="Area2D"]
 script = ExtResource("1_snktt")
 stats = ExtResource("2_6d83d")
 
@@ -348,34 +268,6 @@ frame_progress = 0.957067
 [node name="Shape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_m4iku")
 
-[node name="Attach Label" type="Label" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = -10.0
-offset_right = 70.0
-offset_bottom = 17.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Plant name
-Attach [e]"
-label_settings = SubResource("LabelSettings_2xgj5")
-horizontal_alignment = 1
-
-[node name="QTE" type="Label" parent="."]
-visible = false
-offset_left = -5.0
-offset_top = -22.0
-offset_right = 35.0
-offset_bottom = 1.0
-text = "[1]"
-label_settings = SubResource("LabelSettings_w885g")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_5351p")
@@ -385,31 +277,6 @@ libraries = {
 libraries = {
 "": SubResource("AnimationLibrary_hfwxb")
 }
-
-[node name="Harvest Label" type="HBoxContainer" parent="."]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -34.0
-offset_top = -40.0
-offset_right = 34.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = -8
-alignment = 1
-
-[node name="Label" type="Label" parent="Harvest Label"]
-layout_mode = 2
-text = "+1"
-
-[node name="Nutrient Image" type="TextureRect" parent="Harvest Label"]
-layout_mode = 2
-texture = ExtResource("3_484ba")
-stretch_mode = 2
 
 [node name="QuicktimeTimer" type="Timer" parent="."]
 one_shot = true
