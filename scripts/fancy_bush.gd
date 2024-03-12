@@ -15,7 +15,7 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body is Dodder:
-		var stemrunner = load("res://scenes/stemrunner.tscn")
+		var stemrunner = load("res://scenes/stemrunner/stemrunner.tscn")
 		var stemrunner_instance: CanvasLayer = stemrunner.instantiate()
 		
 		add_child(stemrunner_instance)

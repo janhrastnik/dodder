@@ -6,7 +6,7 @@ extends CharacterBody2D
 @onready var hivemind: HivemindSingleton = get_node("/root/Hivemind")
 @onready var step_sound: AudioStreamPlayer = get_node("StepSound")
 
-var nutrients : int = 0
+var nutrients : int = 100
 var plant: Plant = null 
 
 var state = States.Detached
@@ -14,6 +14,9 @@ enum States {
 	Attached,
 	Detached
 }
+
+func _ready():
+	get_parent().refresh_nutrient_count(nutrients)
 
 func _input(event):
 	if event.is_action_pressed("click") and state == States.Detached:
@@ -49,6 +52,7 @@ func move_to(click_pos: Vector2):
 		animation_player.play("shrink")
 		await get_tree().create_timer(0.3).timeout # počakamo da se animacija zaključi, preden se premaknemo
 		position = point
+		change_nutrients(-1) # stane 1 nutrient, da se premakneš
 		step_sound.play()
 		animation_player.play("grow")
 		await get_tree().create_timer(0.3).timeout
@@ -78,7 +82,7 @@ func detach():
 	get_parent().move_cam(position)
 	get_parent().dodder_detached_event()
 
-func gain_nutrients(amount : int) -> void:
+func change_nutrients(amount : int) -> void:
 	nutrients += amount
 	get_parent().refresh_nutrient_count(nutrients)
 

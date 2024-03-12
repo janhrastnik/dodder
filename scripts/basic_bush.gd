@@ -19,6 +19,7 @@ var dodder : Dodder = null
 @onready var harvest_label: HBoxContainer = get_node("Harvest Label")
 @onready var shake_sound: AudioStreamPlayer = get_node("ShakeSound")
 @onready var harvest_sound: AudioStreamPlayer = get_node("HarvestSound")
+@onready var qte_indicator_sound: AudioStreamPlayer = get_node("QTEindicatorSound")
 
 # qte številka ki jo player mora pritisnit
 var qte_prompt = null
@@ -37,11 +38,12 @@ func _input(event):
 
 func qte_success():
 	harvest_sound.play()
-	dodder.gain_nutrients(1)
+	dodder.change_nutrients(1)
 	qte_stop()
 	show_harvest_label()
 
 func qte_start():
+	qte_indicator_sound.play()
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var num = rng.randi_range(0, 2)

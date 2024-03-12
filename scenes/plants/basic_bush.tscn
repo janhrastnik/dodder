@@ -1,12 +1,13 @@
-[gd_scene load_steps=45 format=3 uid="uid://cix5tvey8646m"]
+[gd_scene load_steps=46 format=3 uid="uid://cix5tvey8646m"]
 
 [ext_resource type="Script" path="res://scripts/basic_bush.gd" id="1_snktt"]
 [ext_resource type="Texture2D" uid="uid://dhce8rl8bqly5" path="res://textures/basic_bush.png" id="1_uubwc"]
 [ext_resource type="Resource" uid="uid://dxb6xb6ppv2sr" path="res://scenes/plants/basic_bush_stats.tres" id="2_6d83d"]
 [ext_resource type="Texture2D" uid="uid://wfevw71pi6qg" path="res://textures/nutrient.png" id="3_484ba"]
 [ext_resource type="Texture2D" uid="uid://cm7q25w4m6qqy" path="res://textures/ui/qtebutton.png" id="5_0hk4t"]
-[ext_resource type="AudioStream" uid="uid://bu3cfw62k38p4" path="res://audio/sfx/Bush Shake.wav" id="6_fpm1k"]
+[ext_resource type="AudioStream" uid="uid://fe6dxe2wu0a4" path="res://audio/sfx/bush shake 2.wav" id="6_fxqeb"]
 [ext_resource type="AudioStream" uid="uid://cfdyymi4nsl5n" path="res://audio/sfx/Nutrient.wav" id="7_ndjl4"]
+[ext_resource type="AudioStream" uid="uid://bwmay42n8hv1v" path="res://audio/sfx/qte_indicator.wav" id="8_uiw8t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipuvm"]
 atlas = ExtResource("1_uubwc")
@@ -467,12 +468,15 @@ autoplay = "idle"
 centered = false
 
 [node name="ShakeSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_fpm1k")
+stream = ExtResource("6_fxqeb")
 volume_db = -10.306
 
 [node name="HarvestSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_ndjl4")
 volume_db = -6.72
+
+[node name="QTEindicatorSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_uiw8t")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
