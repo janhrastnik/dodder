@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1y8uibhywy8n"
-path="res://.godot/imported/test64x64.png-3562f86ee2e270735210f93ef0f1b119.ctex"
+uid="uid://q3ocf0o21bkb"
+path="res://.godot/imported/winup.png-e494f44a597da283f9329bd40457b35c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/stemrunner/test64x64.png"
-dest_files=["res://.godot/imported/test64x64.png-3562f86ee2e270735210f93ef0f1b119.ctex"]
+source_file="res://textures/stemrunner/winup.png"
+dest_files=["res://.godot/imported/winup.png-e494f44a597da283f9329bd40457b35c.ctex"]
 
 [params]
 

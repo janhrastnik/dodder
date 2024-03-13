@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kge857ym3tnj"
-path="res://.godot/imported/test_visited4x.png-d19d2ec38714eedb170d5bc5be02c5fd.ctex"
+uid="uid://cdvedgg0ie18a"
+path="res://.godot/imported/angle-left-up.png-3e674b86e1a4e8f563eff16621c2d60b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/stemrunner/test_visited4x.png"
-dest_files=["res://.godot/imported/test_visited4x.png-d19d2ec38714eedb170d5bc5be02c5fd.ctex"]
+source_file="res://textures/stemrunner/angle-left-up.png"
+dest_files=["res://.godot/imported/angle-left-up.png-3e674b86e1a4e8f563eff16621c2d60b.ctex"]
 
 [params]
 

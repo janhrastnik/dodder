@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kge857ym3tnj"
-path="res://.godot/imported/test_visited4x.png-d19d2ec38714eedb170d5bc5be02c5fd.ctex"
+uid="uid://samvqt1r2mgh"
+path="res://.godot/imported/nutrient3.png-58fcd76c394e81b04e1e8d48101f1aa2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/stemrunner/test_visited4x.png"
-dest_files=["res://.godot/imported/test_visited4x.png-d19d2ec38714eedb170d5bc5be02c5fd.ctex"]
+source_file="res://textures/nutrient3.png"
+dest_files=["res://.godot/imported/nutrient3.png-58fcd76c394e81b04e1e8d48101f1aa2.ctex"]
 
 [params]
 
