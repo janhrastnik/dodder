@@ -1,7 +1,16 @@
-[gd_scene load_steps=17 format=3 uid="uid://cwhj4gnuuceo4"]
+[gd_scene load_steps=20 format=3 uid="uid://cwhj4gnuuceo4"]
 
+[ext_resource type="Script" path="res://scripts/plant.gd" id="1_l1ybg"]
 [ext_resource type="Texture2D" uid="uid://ck3kfhp53v73p" path="res://textures/fancy_bush.png" id="1_nqssk"]
+[ext_resource type="Script" path="res://scripts/plant_stat_resource.gd" id="2_ivu8h"]
 [ext_resource type="AnimationLibrary" uid="uid://dkxxew7b6kfl0" path="res://animations/plant-shake.res" id="3_5tg0g"]
+
+[sub_resource type="Resource" id="Resource_s6rdw"]
+script = ExtResource("2_ivu8h")
+name = "Fancy bush"
+nutrient_count = 100
+nutrient_yield = 20
+has_stemrunner = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r534g"]
 atlas = ExtResource("1_nqssk")
@@ -104,6 +113,8 @@ animations = [{
 radius = 13.0
 
 [node name="Fancy Bush" type="Area2D"]
+script = ExtResource("1_l1ybg")
+stats = SubResource("Resource_s6rdw")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0w20f")

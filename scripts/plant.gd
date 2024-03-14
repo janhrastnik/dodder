@@ -23,6 +23,7 @@ var qte_display : HBoxContainer = null
 var shake_sound: AudioStreamPlayer = null
 var harvest_sound: AudioStreamPlayer = null
 var qte_indicator_sound: AudioStreamPlayer = null
+var qte_failure_sound: AudioStreamPlayer = null
 
 # qte številka ki jo player mora pritisnit
 var qte_prompt = null
@@ -40,6 +41,7 @@ func _ready() -> void:
 	plant_name = stats.name
 	nutrient_count = stats.nutrient_count
 	nutrient_yield = stats.nutrient_yield
+	has_stemrunner = stats.has_stemrunner
 	
 	rng.randomize()
 	
@@ -52,12 +54,10 @@ func _ready() -> void:
 	qte_timer = Timer.new()
 	qte_timer.one_shot = true
 	qte_timer.name = "QTE Timer"
-	#qte_timer.connect("timeout", qte_timer_timeout)
 	add_child(qte_timer)
 
 	start_timer = Timer.new()
 	start_timer.name = "Start Timer"
-	#qte_timer.connect("timeout", qte_timer_timeout)
 	add_child(start_timer)
 	
 	var qte_display_packed = load("res://scenes/plants/qte_container.tscn")
@@ -80,6 +80,11 @@ func _ready() -> void:
 	qte_indicator_sound.volume_db = -7
 	add_child(qte_indicator_sound)
 	
+	qte_failure_sound = AudioStreamPlayer.new()
+	qte_failure_sound.stream = load("res://audio/sfx/qte_failure.wav")
+	qte_failure_sound.volume_db = -7
+	add_child(qte_failure_sound)
+
 	# signals
 	qte_timer.connect("timeout", on_quicktime_timer_timeout)
 	start_timer.connect("timeout", on_start_timer_timeout)
@@ -87,11 +92,16 @@ func _ready() -> void:
 	connect("body_exited", on_body_exited)
 
 func _input(event):
-	if ((event.is_action_pressed("QTE1") and qte_prompt == 1) \
-	or (event.is_action_pressed("QTE2") and qte_prompt == 2) \
-	or (event.is_action_pressed("QTE3") and qte_prompt == 3)) \
-	and not qte_timer.is_stopped():
-		qte_success()
+	if dodder and not is_animating:
+		if ((event.is_action_pressed("QTE1") and qte_prompt == 1) \
+		or (event.is_action_pressed("QTE2") and qte_prompt == 2) \
+		or (event.is_action_pressed("QTE3") and qte_prompt == 3)) \
+		and not qte_timer.is_stopped():
+			qte_success()
+		elif (event.is_action_pressed("QTE1") and qte_prompt != 1) \
+		or (event.is_action_pressed("QTE2") and qte_prompt != 2) \
+		or (event.is_action_pressed("QTE3") and qte_prompt != 3):
+			qte_failure()
 
 func show_popup_text():
 	popup_text.show()
@@ -117,6 +127,7 @@ func attach(d : Dodder) -> void:
 	animation_player.play("plant-shake/shake")
 	shake_sound.play()
 	dodder = d
+	sprite.animation = "infected"
 	await get_tree().create_timer(0.1).timeout
 	
 	if has_stemrunner:
@@ -129,6 +140,7 @@ func detach() -> void:
 	start_timer.stop()
 	qte_display.visible = false
 	shake_sound.play()
+	dodder = null
 	animation_player.play("plant-shake/shake")
 	await get_tree().create_timer(0.1).timeout
 	sprite.animation = "idle"
@@ -138,10 +150,20 @@ func show_phase_popup(phase_text: String):
 	popup_text.get_node("AnimationPlayer").play("phase_popup")
 
 func begin_stemrunner_phase():
+	# show the stemrunner phase popup animation
+	show_phase_popup("Incursion Phase")
+	is_animating = true
+	await get_tree().create_timer(1.8).timeout
+	is_animating = false
+	
 	var stemrunner = load("res://scenes/stemrunner/stemrunner.tscn")
 	var stemrunner_instance: CanvasLayer = stemrunner.instantiate()
 	
 	add_child(stemrunner_instance)
+
+func stemrunner_win():
+	get_node("Stemrunner").call_deferred("queue_free")
+	begin_harvest_phase()
 
 func begin_harvest_phase():
 	# show the phase popup animation
@@ -149,12 +171,9 @@ func begin_harvest_phase():
 	is_animating = true
 	await get_tree().create_timer(1.8).timeout
 	is_animating = false
+	
 	qte_display.visible = true
 	start_timer.start()
-	sprite.animation = "infected"
-
-func qte_timer_timeout():
-	pass
 
 func qte_start():
 	qte_indicator_sound.play()
@@ -194,6 +213,37 @@ func qte_success():
 	qte_stop()
 	show_harvest()
 	
+	nutrient_count -= nutrient_yield
+	if nutrient_count <= 0:
+		depleted_event()
+
+func qte_failure():
+	start_timer.stop()
+	qte_timer.stop()
+	qte_failure_sound.play()
+	is_animating = true
+	var one: AnimatedSprite2D = qte_display.get_node("One/One Button")
+	var two: AnimatedSprite2D = qte_display.get_node("Two/Two Button")
+	var three: AnimatedSprite2D = qte_display.get_node("Three/Three Button")
+	one.set_frame(0)
+	one.animation = "wrong"
+	two.set_frame(0)
+	two.animation = "wrong"
+	three.set_frame(0)
+	three.animation = "wrong"
+	
+	await get_tree().create_timer(1.0).timeout
+	is_animating = false
+	one.set_frame(0)
+	one.animation = "idle"
+	two.set_frame(0)
+	two.animation = "idle"
+	three.set_frame(0)
+	three.animation = "idle"
+	
+	start_timer.start()
+	
+	# punishment for failure is unrealised yield
 	nutrient_count -= nutrient_yield
 	if nutrient_count <= 0:
 		depleted_event()

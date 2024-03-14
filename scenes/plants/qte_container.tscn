@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://blbh5s7atogp7"]
+[gd_scene load_steps=32 format=3 uid="uid://blbh5s7atogp7"]
 
 [ext_resource type="Texture2D" uid="uid://cm7q25w4m6qqy" path="res://textures/ui/qtebutton.png" id="1_lvduk"]
 
@@ -17,6 +17,26 @@ region = Rect2(0, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_o1pve"]
 atlas = ExtResource("1_lvduk")
 region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o57n0"]
+atlas = ExtResource("1_lvduk")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4sflq"]
+atlas = ExtResource("1_lvduk")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e333e"]
+atlas = ExtResource("1_lvduk")
+region = Rect2(448, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ro4df"]
+atlas = ExtResource("1_lvduk")
+region = Rect2(480, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uw0e"]
+atlas = ExtResource("1_lvduk")
+region = Rect2(512, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u2xkd"]
 animations = [{
@@ -41,6 +61,26 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o57n0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4sflq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e333e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ro4df")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8uw0e")
+}],
+"loop": true,
+"name": &"wrong",
+"speed": 5.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rvfn8"]
@@ -58,6 +98,26 @@ region = Rect2(128, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_o2fla"]
 atlas = ExtResource("1_lvduk")
 region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pjju"]
+atlas = ExtResource("1_lvduk")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y17eb"]
+atlas = ExtResource("1_lvduk")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eu3ts"]
+atlas = ExtResource("1_lvduk")
+region = Rect2(448, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sama"]
+atlas = ExtResource("1_lvduk")
+region = Rect2(480, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4csja"]
+atlas = ExtResource("1_lvduk")
+region = Rect2(512, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_upos5"]
 animations = [{
@@ -82,6 +142,26 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3pjju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y17eb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eu3ts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2sama")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4csja")
+}],
+"loop": true,
+"name": &"wrong",
+"speed": 5.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s882n"]
@@ -99,6 +179,26 @@ region = Rect2(256, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_184ip"]
 atlas = ExtResource("1_lvduk")
 region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w68qa"]
+atlas = ExtResource("1_lvduk")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8xks"]
+atlas = ExtResource("1_lvduk")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k11fn"]
+atlas = ExtResource("1_lvduk")
+region = Rect2(448, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgger"]
+atlas = ExtResource("1_lvduk")
+region = Rect2(480, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvdv3"]
+atlas = ExtResource("1_lvduk")
+region = Rect2(512, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h6prt"]
 animations = [{
@@ -123,6 +223,26 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w68qa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8xks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k11fn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgger")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uvdv3")
+}],
+"loop": true,
+"name": &"wrong",
+"speed": 5.0
 }]
 
 [node name="QTE Container" type="HBoxContainer"]

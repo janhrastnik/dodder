@@ -10,6 +10,7 @@ const HEIGHT = 128
 @onready var camera: Camera2D = get_node("Camera2D")
 @onready var dodder_ui: CanvasLayer = get_node("Dodder UI")
 @onready var click_circle: AnimatedSprite2D = get_node("Click Circle")
+@onready var music: AudioStreamPlayer = get_node("Music")
 var dodder: Dodder = null # the player
 
 func _ready():
@@ -75,3 +76,6 @@ func dodder_hide_info_text():
 
 func refresh_nutrient_count(nutrients: int):
 	dodder_ui.refresh_nutrient_count(nutrients)
+
+func _on_music_finished():
+	music.play()

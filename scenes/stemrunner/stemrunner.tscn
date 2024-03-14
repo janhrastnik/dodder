@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://400qin8ypn3m"]
+[gd_scene load_steps=4 format=3 uid="uid://400qin8ypn3m"]
 
 [ext_resource type="Script" path="res://scripts/stemrunner.gd" id="1_soych"]
+[ext_resource type="AudioStream" uid="uid://camckhv021g51" path="res://audio/sfx/stemrunner.wav" id="2_pfeth"]
+[ext_resource type="AudioStream" uid="uid://diiov6qpe0g2a" path="res://audio/sfx/stemrunner_win.wav" id="3_0unv0"]
 
 [node name="Stemrunner" type="CanvasLayer"]
 script = ExtResource("1_soych")
@@ -20,3 +22,10 @@ grow_vertical = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 5
+
+[node name="MoveSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_pfeth")
+volume_db = -6.0
+
+[node name="WinSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_0unv0")

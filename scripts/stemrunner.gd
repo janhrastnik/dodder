@@ -1,6 +1,8 @@
 extends CanvasLayer
 
 @onready var grid: GridContainer = get_node("GridContainer")
+@onready var move_sound: AudioStreamPlayer = get_node("MoveSound")
+@onready var win_sound: AudioStreamPlayer = get_node("WinSound")
 
 enum Direction {
 	Up,
@@ -51,22 +53,23 @@ func _process(delta):
 	pass
 
 func _input(event):
-	if event.is_action_pressed("up") and direction != Direction.Down:
-		if head_position.y > 0 and not Vector2(head_position.x, head_position.y-1) in visited:
-			head_position.y -= 1
-			change_grid(Direction.Up)
-	elif event.is_action_pressed("down") and direction != Direction.Up:
-		if head_position.y < 4 and not Vector2(head_position.x, head_position.y+1) in visited:
-			head_position.y += 1
-			change_grid(Direction.Down)
-	elif event.is_action_pressed("left") and direction != Direction.Right:
-		if head_position.x > 0 and not Vector2(head_position.x-1, head_position.y) in visited:
-			head_position.x -= 1
-			change_grid(Direction.Left)
-	elif event.is_action_pressed("right") and direction != Direction.Left:
-		if head_position.x < 4 and not Vector2(head_position.x+1, head_position.y) in visited:
-			head_position.x += 1
-			change_grid(Direction.Right)
+	if not win_condition:
+		if event.is_action_pressed("up") and direction != Direction.Down:
+			if head_position.y > 0 and not Vector2(head_position.x, head_position.y-1) in visited:
+				head_position.y -= 1
+				change_grid(Direction.Up)
+		elif event.is_action_pressed("down") and direction != Direction.Up:
+			if head_position.y < 4 and not Vector2(head_position.x, head_position.y+1) in visited:
+				head_position.y += 1
+				change_grid(Direction.Down)
+		elif event.is_action_pressed("left") and direction != Direction.Right:
+			if head_position.x > 0 and not Vector2(head_position.x-1, head_position.y) in visited:
+				head_position.x -= 1
+				change_grid(Direction.Left)
+		elif event.is_action_pressed("right") and direction != Direction.Left:
+			if head_position.x < 4 and not Vector2(head_position.x+1, head_position.y) in visited:
+				head_position.x += 1
+				change_grid(Direction.Right)
 
 func init_grid():
 	var texture: Texture2D = load("res://textures/stemrunner/hidden.png")
@@ -87,14 +90,15 @@ func init_grid():
 	win_position = get_random_tile()
 	while win_position == Vector2(0,2):
 		win_position = get_random_tile()
-	win_position = Vector2(2,2)
+	#win_position = Vector2(2,2) # for development
 	
 func change_grid(move_direction: Direction):
-	
+	move_sound.play()
 	var current_tile: TextureRect = grid.get_node("{x},{y}".format({x=head_position.x,y=head_position.y}))
 	if move_direction == Direction.Up:
 		if head_position == win_position:
 			current_tile.texture = win_up
+			win_condition = true
 		else:
 			current_tile.texture = dodder_head_down
 		if direction == Direction.Right:
@@ -106,6 +110,7 @@ func change_grid(move_direction: Direction):
 	elif move_direction == Direction.Down:
 		if head_position == win_position:
 			current_tile.texture = win_down
+			win_condition = true
 		else:
 			current_tile.texture = dodder_head_up
 		if direction == Direction.Right:
@@ -117,6 +122,7 @@ func change_grid(move_direction: Direction):
 	elif move_direction == Direction.Right:
 		if head_position == win_position:
 			current_tile.texture = win_left
+			win_condition = true
 		else:
 			current_tile.texture = dodder_head_left
 		if direction == Direction.Up:
@@ -128,6 +134,7 @@ func change_grid(move_direction: Direction):
 	else:
 		if head_position == win_position:
 			current_tile.texture = win_right
+			win_condition = true
 		else:
 			current_tile.texture = dodder_head_right
 		if direction == Direction.Up:
@@ -139,8 +146,15 @@ func change_grid(move_direction: Direction):
 	direction = move_direction
 	previous_tile = current_tile
 	visited.append(head_position)
+	if win_condition:
+		win()
 
 func get_random_tile() -> Vector2:
 	var x = rng.randi_range(0, 5)
 	var y = rng.randi_range(0, 5)
 	return Vector2(x, y)
+
+func win():
+	win_sound.play()
+	await get_tree().create_timer(1.0).timeout
+	get_parent().stemrunner_win()
