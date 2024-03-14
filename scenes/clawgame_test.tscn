@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyghyxxlr2wft"]
+
+[ext_resource type="Texture2D" uid="uid://eh5r48v8bv6n" path="res://textures/clawgame/dna.png" id="1_jfidh"]
+[ext_resource type="Script" path="res://scripts/clawgame_test.gd" id="1_tvth3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mapav"]
+
+[node name="Clawgame Test" type="Area2D"]
+script = ExtResource("1_tvth3")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mapav")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_jfidh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

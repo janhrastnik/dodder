@@ -156,7 +156,7 @@ func begin_stemrunner_phase():
 	await get_tree().create_timer(1.8).timeout
 	is_animating = false
 	
-	var stemrunner = load("res://scenes/stemrunner/stemrunner.tscn")
+	var stemrunner = load("res://scenes/minigames/stemrunner.tscn")
 	var stemrunner_instance: CanvasLayer = stemrunner.instantiate()
 	
 	add_child(stemrunner_instance)
@@ -273,4 +273,3 @@ func on_body_entered(body):
 func on_body_exited(body):
 	if body is Dodder:
 		hide_popup_text()
-		pass

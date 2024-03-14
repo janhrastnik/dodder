@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://400qin8ypn3m"]
 
-[ext_resource type="Script" path="res://scripts/stemrunner.gd" id="1_soych"]
-[ext_resource type="AudioStream" uid="uid://camckhv021g51" path="res://audio/sfx/stemrunner.wav" id="2_pfeth"]
-[ext_resource type="AudioStream" uid="uid://diiov6qpe0g2a" path="res://audio/sfx/stemrunner_win.wav" id="3_0unv0"]
+[ext_resource type="Script" path="res://scripts/stemrunner.gd" id="1_y4mi7"]
+[ext_resource type="AudioStream" uid="uid://camckhv021g51" path="res://audio/sfx/stemrunner.wav" id="2_5sxjx"]
+[ext_resource type="AudioStream" uid="uid://diiov6qpe0g2a" path="res://audio/sfx/stemrunner_win.wav" id="3_lk6wk"]
 
 [node name="Stemrunner" type="CanvasLayer"]
-script = ExtResource("1_soych")
+script = ExtResource("1_y4mi7")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 anchors_preset = 8
@@ -24,8 +24,8 @@ theme_override_constants/v_separation = 0
 columns = 5
 
 [node name="MoveSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_pfeth")
+stream = ExtResource("2_5sxjx")
 volume_db = -6.0
 
 [node name="WinSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_0unv0")
+stream = ExtResource("3_lk6wk")
