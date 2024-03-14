@@ -4,5 +4,7 @@
 
 [resource]
 script = ExtResource("1_ya6q8")
-name = "Foobar"
-nutrients = 10
+name = "Basic Bush"
+nutrient_count = 50
+nutrient_yield = 10
+has_stemrunner = false

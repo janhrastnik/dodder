@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://buy1pqe1ea4qt"]
+[gd_scene load_steps=11 format=3 uid="uid://buy1pqe1ea4qt"]
 
-[ext_resource type="Texture2D" uid="uid://be6b5m03l17ib" path="res://textures/nutrient2.png" id="1_2fdoj"]
+[ext_resource type="Texture2D" uid="uid://samvqt1r2mgh" path="res://textures/nutrient3.png" id="1_ea8ij"]
+[ext_resource type="Texture2D" uid="uid://ow7x5a7a63lr" path="res://textures/ui/ui_box_light.png" id="2_0xg12"]
 
 [sub_resource type="Animation" id="Animation_cfsk6"]
 resource_name = "harvest"
@@ -57,13 +58,50 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_k6qpa"]
+resource_name = "phase_popup"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Phase Sign/Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.3, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(376, 648), Vector2(376, 300), Vector2(376, 250), Vector2(376, -200)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qxaso"]
 _data = {
 "harvest": SubResource("Animation_cfsk6"),
+"phase_popup": SubResource("Animation_k6qpa"),
 "text_popup": SubResource("Animation_1370v")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_vlru7"]
+font_size = 8
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cw6aw"]
+texture = ExtResource("2_0xg12")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="Theme" id="Theme_cmhf2"]
+Panel/styles/panel = SubResource("StyleBoxTexture_cw6aw")
+
+[sub_resource type="LabelSettings" id="LabelSettings_n1jx3"]
+font_size = 32
+font_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
 [node name="Popup Text" type="Node2D"]
+z_index = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -84,11 +122,11 @@ offset_bottom = 10.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "foobar"
+label_settings = SubResource("LabelSettings_vlru7")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Harvest Label" type="HBoxContainer" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -110,5 +148,29 @@ text = "+1"
 [node name="Nutrient Image" type="TextureRect" parent="Harvest Label"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
-texture = ExtResource("1_2fdoj")
+texture = ExtResource("1_ea8ij")
 stretch_mode = 3
+
+[node name="Phase Sign" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="Phase Sign"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = 200.001
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_cmhf2")
+
+[node name="Label" type="Label" parent="Phase Sign/Panel"]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 200.0
+text = "PHASE"
+label_settings = SubResource("LabelSettings_n1jx3")
+horizontal_alignment = 1
+vertical_alignment = 1

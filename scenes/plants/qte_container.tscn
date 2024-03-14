@@ -147,6 +147,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="One Button" type="AnimatedSprite2D" parent="One"]
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_u2xkd")
 animation = &"idle"
 autoplay = "idle"
@@ -159,6 +160,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Two Button" type="AnimatedSprite2D" parent="Two"]
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_upos5")
 animation = &"idle"
 autoplay = "idle"
@@ -171,6 +173,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Three Button" type="AnimatedSprite2D" parent="Three"]
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_h6prt")
 animation = &"idle"
 autoplay = "idle"

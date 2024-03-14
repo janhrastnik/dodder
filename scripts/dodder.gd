@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var step_sound: AudioStreamPlayer = get_node("StepSound")
 
 var nutrients : int = 100
-var plant: Plant = null 
+var plant: Plant = null
 
 var state = States.Detached
 enum States {
@@ -30,11 +30,12 @@ func _input(event):
 func _process(delta):
 	match state:
 		States.Detached:
-			if Input.is_action_just_pressed("attach") and plant:
-				attach()
+			if Input.is_action_just_pressed("attach") and plant and not plant.is_animating:
+				if not plant.is_depleted:
+					attach()
 		
 		States.Attached:
-			if Input.is_action_just_pressed("detach") and plant:
+			if Input.is_action_just_pressed("detach") and plant and not plant.is_animating:
 				detach()
 	
 ## Fancy movement funkcija. vzame razdaljo med klikom in trenutno pozicijo,
@@ -96,7 +97,7 @@ func set_colisions_disabled(b : bool) -> void:
 func _on_area_2d_area_entered(area):
 	if area is Plant:
 		plant = area
-	get_parent().dodder_attachable_event()
+		get_parent().dodder_attachable_event(plant.is_depleted)
 	areacount += 1
 
 func _on_area_2d_area_exited(area):

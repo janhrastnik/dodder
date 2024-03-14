@@ -12,16 +12,18 @@ func _process(delta):
 	pass
 
 func attached_event():
-	print("here")
 	info_label.visible = true
 	info_label.text = "Press spacebar to detach"
 
 func hide_info_text():
 	info_label.visible = false
 	
-func attachable_event():
+func attachable_event(is_depleted: bool):
 	info_label.visible = true
-	info_label.text = "Press e to attach"	
+	if is_depleted:
+		info_label.text = "Depleted!"
+	else:
+		info_label.text = "Press e to attach"
 
 func refresh_nutrient_count(nutrients: int):
 	get_node("Panel/VBoxContainer/Label").text = "Nutrients: {count}".format({count=nutrients})

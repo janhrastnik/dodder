@@ -1,14 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://cix5tvey8646m"]
+[gd_scene load_steps=18 format=3 uid="uid://cwnime7os7nuk"]
 
-[ext_resource type="Script" path="res://scripts/basic_bush.gd" id="1_snktt"]
+[ext_resource type="Script" path="res://scripts/plant.gd" id="1_5a35p"]
 [ext_resource type="Texture2D" uid="uid://dhce8rl8bqly5" path="res://textures/basic_bush.png" id="1_uubwc"]
-[ext_resource type="Resource" uid="uid://dxb6xb6ppv2sr" path="res://scenes/plants/basic_bush_stats.tres" id="2_6d83d"]
+[ext_resource type="Resource" uid="uid://dxb6xb6ppv2sr" path="res://scenes/plants/basic_bush_stats.tres" id="2_7xw8u"]
+[ext_resource type="AnimationLibrary" uid="uid://dkxxew7b6kfl0" path="res://animations/plant-shake.res" id="4_fnys3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipuvm"]
-atlas = ExtResource("1_uubwc")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qgmq6"]
 atlas = ExtResource("1_uubwc")
 region = Rect2(0, 0, 32, 32)
 
@@ -27,6 +24,10 @@ region = Rect2(96, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_jxsx7"]
 atlas = ExtResource("1_uubwc")
 region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tl3v"]
+atlas = ExtResource("1_uubwc")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_82pvs"]
 atlas = ExtResource("1_uubwc")
@@ -55,9 +56,6 @@ animations = [{
 "texture": SubResource("AtlasTexture_ipuvm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qgmq6")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_dkut1")
 }, {
 "duration": 1.0,
@@ -68,6 +66,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jxsx7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tl3v")
 }],
 "loop": true,
 "name": &"idle",
@@ -88,6 +89,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1joh6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fejht")
 }],
 "loop": true,
 "name": &"infected",
@@ -97,33 +101,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_m4iku"]
 radius = 13.0384
 
-[sub_resource type="Animation" id="Animation_b3st1"]
-resource_name = "shake"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.8, 0.8), Vector2(1.2, 1.2), Vector2(1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5351p"]
-_data = {
-"shake": SubResource("Animation_b3st1")
-}
-
-[node name="BasicBush" type="Area2D"]
-script = ExtResource("1_snktt")
-stats = ExtResource("2_6d83d")
+[node name="Basic Bush" type="Area2D"]
+script = ExtResource("1_5a35p")
+stats = ExtResource("2_7xw8u")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_gg6vi")
 animation = &"infected"
 autoplay = "idle"
@@ -133,8 +115,5 @@ shape = SubResource("CircleShape2D_m4iku")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_5351p")
+"plant-shake": ExtResource("4_fnys3")
 }
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,6 +1,4 @@
-class_name FancyBush
-
-extends Area2D
+extends Plant
 
 ## Trenutno sam uporabljam to kot test za stemrunner
 
@@ -15,10 +13,7 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body is Dodder:
-		var stemrunner = load("res://scenes/stemrunner/stemrunner.tscn")
-		var stemrunner_instance: CanvasLayer = stemrunner.instantiate()
-		
-		add_child(stemrunner_instance)
+		pass
 
 	
 func _on_body_exited(body):

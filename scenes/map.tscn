@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://6tv40q4iw0ue" path="res://scenes/ui/dodder_ui.tscn" id="4_yy8mp"]
 [ext_resource type="Texture2D" uid="uid://blc7qjosuq3a5" path="res://textures/ui/click_circle.png" id="5_v68f6"]
 [ext_resource type="PackedScene" uid="uid://cwbej7jwbypke" path="res://scenes/spawn_areas/spawn_area.tscn" id="6_tra6f"]
-[ext_resource type="PackedScene" uid="uid://cix5tvey8646m" path="res://scenes/plants/basic_bush.tscn" id="7_qb58n"]
+[ext_resource type="PackedScene" uid="uid://cwnime7os7nuk" path="res://scenes/plants/basic_bush.tscn" id="7_qb58n"]
 [ext_resource type="PackedScene" uid="uid://cwhj4gnuuceo4" path="res://scenes/plants/fancy_bush.tscn" id="8_7woyy"]
 [ext_resource type="AudioStream" uid="uid://co4gf2t7vsf8j" path="res://audio/music/Morning.mp3" id="9_qkdep"]
 
