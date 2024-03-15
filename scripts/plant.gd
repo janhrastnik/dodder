@@ -70,7 +70,7 @@ func _ready() -> void:
 	
 	# add sounds
 	shake_sound = AudioStreamPlayer.new()
-	shake_sound.stream = load("res://audio/sfx/Bush Shake 2.wav")
+	shake_sound.stream = load("res://audio/sfx/bush shake 2.wav")
 	shake_sound.volume_db = -10
 	add_child(shake_sound)
 

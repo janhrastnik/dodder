@@ -11,39 +11,30 @@ const HEIGHT = 128
 @onready var dodder_ui: CanvasLayer = get_node("Dodder UI")
 @onready var click_circle: AnimatedSprite2D = get_node("Click Circle")
 @onready var music: AudioStreamPlayer = get_node("Music")
+@onready var out_of_bounds_label: Label = get_node("Out Of Bounds Label")
 var dodder: Dodder = null # the player
 
+var sector_scene = load("res://scenes/sector.tscn")
+var dodder_scene = load("res://scenes/dodder/dodder.tscn")
+
 func _ready():
-	#spawn_plant_on_random_point("basic_bush")
 	spawn_baby_dodder()
 	create_map()
+	create_border()
 
 func _input(event):
 	if event.is_action_pressed("click"):
 		if dodder:
-			#print(event.position)
 			var pos = get_local_mouse_position()
-			#dodder.move_to(pos)
-			#camera.slide(pos)
-			click_animation(pos)
+			if pos.x < -64 or pos.y < -64:
+				out_of_bounds_animation(pos)
+			else:
+				click_animation(pos)
 
 func move_cam(pos : Vector2) -> void:
 	camera.slide(pos)
 
-func spawn_plant_on_random_point(plant_name: String):
-	var plant = load("res://scenes/plants/{name}.tscn".format({name=plant_name}))
-	var plant_instance: Area2D = plant.instantiate()
-	
-	var rng = RandomNumberGenerator.new()
-	var x = rng.randi_range(0, WIDTH)
-	var y = rng.randi_range(0, HEIGHT)
-	
-	plant_instance.translate(Vector2(x,y))
-	
-	add_child(plant_instance)
-
 func spawn_baby_dodder():
-	var dodder_scene = load("res://scenes/dodder/dodder.tscn")
 	var dodder_instance: Dodder = dodder_scene.instantiate()
 	
 	dodder_instance.position = Vector2(WIDTH/2,HEIGHT/2)
@@ -57,7 +48,6 @@ func create_map():
 			add_sector(x*128, y*128, "BasicGrass")
 
 func add_sector(x: int, y: int, sector_type: String):
-	var sector_scene = load("res://scenes/sector.tscn")
 	var sector_instance: Sector = sector_scene.instantiate()
 	sector_instance.position.x = x
 	sector_instance.position.y = y
@@ -68,10 +58,60 @@ func add_sector(x: int, y: int, sector_type: String):
 	sector_instance.sector_data = sector_data
 	add_child(sector_instance)
 
+func create_border():
+	# corners
+	var corner_left_up = Sprite2D.new()
+	corner_left_up.texture = load("res://textures/border/corner-left-up.png")
+	corner_left_up.global_position = Vector2(-128, -128)
+
+	var corner_right_up = Sprite2D.new()
+	corner_right_up.texture = load("res://textures/border/corner-right-up.png")
+	corner_right_up.position = Vector2(640, -128)
+
+	var corner_left_down = Sprite2D.new()
+	corner_left_down.texture = load("res://textures/border/corner-left-down.png")
+	corner_left_down.position = Vector2(-128, 640)
+
+	var corner_right_down = Sprite2D.new()
+	corner_right_down.texture = load("res://textures/border/corner-right-down.png")
+	corner_right_down.position = Vector2(640, 640)
+
+	for i in range(5):
+		var pipe_up = Sprite2D.new()
+		pipe_up.texture = load("res://textures/border/pipe-h-up.png")
+		pipe_up.position = Vector2(i * 128, -128)
+		add_child(pipe_up)
+
+		var pipe_down = Sprite2D.new()
+		pipe_down.texture = load("res://textures/border/pipe-h-down.png")
+		pipe_down.position = Vector2(i * 128, 640)
+		add_child(pipe_down)
+
+		var pipe_left = Sprite2D.new()
+		pipe_left.texture = load("res://textures/border/pipe-v-left.png")
+		pipe_left.position = Vector2(-128, i * 128)
+		add_child(pipe_left)
+
+		var pipe_right = Sprite2D.new()
+		pipe_right.texture = load("res://textures/border/pipe-v-right.png")
+		pipe_right.position = Vector2(640, i * 128)
+		add_child(pipe_right)
+
+	add_child(corner_left_up)
+	add_child(corner_right_up)
+	add_child(corner_left_down)
+	add_child(corner_right_down)
+
 func click_animation(loc: Vector2):
 	click_circle.position = loc
 	click_circle.visible = true
 	click_circle.play("click")
+
+func out_of_bounds_animation(loc: Vector2):
+	out_of_bounds_label.position = loc
+	out_of_bounds_label.show()
+	await get_tree().create_timer(2).timeout
+	out_of_bounds_label.hide()
 
 func _on_click_circle_animation_finished():
 	click_circle.stop()

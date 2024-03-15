@@ -9,10 +9,6 @@ var is_moving = false
 func _ready():
 	position_smoothing_enabled = true
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func slide(to: Vector2):
 	await get_tree().create_timer(0.2).timeout
 	var quotient = (to - position).length()

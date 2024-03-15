@@ -3,6 +3,8 @@ extends CanvasLayer
 @onready var grid: GridContainer = get_node("GridContainer")
 @onready var move_sound: AudioStreamPlayer = get_node("MoveSound")
 @onready var win_sound: AudioStreamPlayer = get_node("WinSound")
+@onready var timer: Timer = get_node("Timer")
+@onready var timer_label: Label = get_node("Timer Panel/Timer Label") 
 
 enum Direction {
 	Up,
@@ -43,6 +45,8 @@ var win_down = load("res://textures/stemrunner/windown.png")
 
 var rng = RandomNumberGenerator.new()
 
+var diff = 0.5
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init_grid()
@@ -50,7 +54,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	diff += delta
+	if diff > 0.5:
+		timer_label.text = str(round(timer.time_left)) + " seconds left!"
+		diff = 0
 
 func _input(event):
 	if not win_condition:

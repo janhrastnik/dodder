@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bo5cge52r5tdd"]
+[gd_scene load_steps=14 format=3 uid="uid://bo5cge52r5tdd"]
 
 [ext_resource type="Script" path="res://scripts/map.gd" id="1_a7gl2"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="3_lde8x"]
@@ -7,6 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://cwhj4gnuuceo4" path="res://scenes/plants/fancy_bush.tscn" id="8_7woyy"]
 [ext_resource type="AudioStream" uid="uid://co4gf2t7vsf8j" path="res://audio/music/Morning.mp3" id="9_qkdep"]
 [ext_resource type="PackedScene" uid="uid://cyghyxxlr2wft" path="res://scenes/clawgame_test.tscn" id="10_x8w6s"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8oik0"]
+font_size = 8
+font_color = Color(1, 0.392157, 0.392157, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ff654"]
 atlas = ExtResource("5_v68f6")
@@ -46,6 +50,14 @@ animations = [{
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_a7gl2")
+
+[node name="Out Of Bounds Label" type="Label" parent="."]
+visible = false
+z_index = 2
+offset_right = 152.0
+offset_bottom = 21.0
+text = "Can't cross the road!"
+label_settings = SubResource("LabelSettings_8oik0")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(64, 64)

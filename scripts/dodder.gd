@@ -15,6 +15,8 @@ enum States {
 	Detached
 }
 
+var is_moving = false
+
 var has_double_strand = false
 
 # hack, to know when to not display the dodder ui info label
@@ -24,10 +26,13 @@ func _ready():
 	get_parent().refresh_nutrient_count(nutrients)
 
 func _input(event):
-	if event.is_action_pressed("click") and state == States.Detached:
+	if event.is_action_pressed("click") and state == States.Detached and not is_moving:
 		var p = get_global_mouse_position()
-		move_to(p)
-		get_parent().move_cam(p)
+		if p.x < -64 or p.y < -64:
+			print("out of bounds!")
+		else:
+			move_to(p)
+			get_parent().move_cam(p)
 	match state:
 		States.Detached:
 			if event.is_action_pressed("attach") and plant and not plant.is_animating:
@@ -41,6 +46,7 @@ func _input(event):
 ## določi vmesne korake za "animacijo", in se postopoma premakne po teh korakih.
 ## Vzamemo en korak na vsakih 32 pikslov razdalje.
 func move_to(click_pos: Vector2):
+	is_moving = true
 	var diff = click_pos - position # vektor od dodderja do klika
 	var dist = diff.length()
 	var step_count = int(dist / 32) # število vmesnih korakov
@@ -59,6 +65,7 @@ func move_to(click_pos: Vector2):
 		step_sound.play()
 		animation_player.play("grow")
 		await get_tree().create_timer(0.3).timeout
+	is_moving = false
 
 ## dodder se attacha na plant. Zbrišemo ta physical dodder entity. 
 ## V hivemind singleton (naš globalni gamedata) shranimo spremembo.
@@ -69,8 +76,7 @@ func attach():
 	
 	state = States.Attached
 	visible = false
-	
-	get_parent().move_cam(plant.position)
+	get_parent().move_cam(plant.global_position)
 	get_parent().dodder_attached_event()
 
 func detach():
@@ -79,9 +85,8 @@ func detach():
 	set_colisions_disabled(false)
 	
 	state = States.Detached
-	position = plant.position + Vector2(0, 15)
+	position = plant.global_position + Vector2(0, 15)
 	visible = true
-
 	get_parent().move_cam(position)
 	#get_parent().dodder_hide_info_text()
 
@@ -103,3 +108,4 @@ func _on_area_exited(area):
 	areacount -= 1
 	if areacount == 0 and state == States.Detached:
 		get_parent().dodder_hide_info_text()
+		plant = null
