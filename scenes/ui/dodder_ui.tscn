@@ -1,31 +1,46 @@
-[gd_scene load_steps=3 format=3 uid="uid://6tv40q4iw0ue"]
+[gd_scene load_steps=9 format=3 uid="uid://6tv40q4iw0ue"]
 
 [ext_resource type="Script" path="res://scripts/dodder_ui.gd" id="1_12od8"]
 [ext_resource type="Texture2D" uid="uid://degtuoiiypv3g" path="res://textures/nutrient3_64x64.png" id="2_mdxe4"]
+[ext_resource type="Texture2D" uid="uid://ct3vggaar17c6" path="res://textures/dna_strands/dna_green.png" id="2_sj01d"]
+[ext_resource type="Texture2D" uid="uid://ddy75sduwvj6u" path="res://textures/dna_strands/dna_red.png" id="4_5lgwx"]
+[ext_resource type="Texture2D" uid="uid://cntd7nim82ctr" path="res://textures/dna_strands/dna_blue.png" id="5_7yn2q"]
+[ext_resource type="Texture2D" uid="uid://b3r5f6sl22xsa" path="res://textures/dna_strands/dna_yellow.png" id="6_7y50n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6g5lb"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_uqgov"]
+font_size = 24
 
 [node name="Dodder UI" type="CanvasLayer"]
 script = ExtResource("1_12od8")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Nutrients Panel" type="Panel" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = -210.0
-offset_right = 287.0
-offset_bottom = -10.0
+offset_top = -130.0
+offset_right = 370.0
 grow_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="Nutrients Container" type="HBoxContainer" parent="Nutrients Panel"]
 layout_mode = 0
-offset_left = 23.0
-offset_top = 22.0
-offset_right = 253.0
-offset_bottom = 176.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 353.0
+offset_bottom = 114.0
+alignment = 1
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+[node name="Nutrients Label" type="Label" parent="Nutrients Panel/Nutrients Container"]
 layout_mode = 2
-text = "Nutrients: 0"
+text = "Nutrients: 1000"
+label_settings = SubResource("LabelSettings_6g5lb")
+
+[node name="Nutrients Logo" type="TextureRect" parent="Nutrients Panel/Nutrients Container"]
+layout_mode = 2
+texture = ExtResource("2_mdxe4")
+stretch_mode = 3
 
 [node name="Info Label" type="Label" parent="."]
 anchors_preset = 7
@@ -57,3 +72,46 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("2_mdxe4")
 stretch_mode = 3
+
+[node name="DNA Panel" type="Panel" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -440.0
+offset_bottom = 170.0
+grow_horizontal = 0
+
+[node name="DNA Container" type="VBoxContainer" parent="DNA Panel"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 16.0
+offset_right = 418.0
+offset_bottom = 154.0
+
+[node name="DNA Text" type="Label" parent="DNA Panel/DNA Container"]
+layout_mode = 2
+text = "DNA strands:"
+label_settings = SubResource("LabelSettings_uqgov")
+
+[node name="DNA Strands Container" type="HBoxContainer" parent="DNA Panel/DNA Container"]
+layout_mode = 2
+
+[node name="Green" type="TextureRect" parent="DNA Panel/DNA Container/DNA Strands Container"]
+modulate = Color(1, 1, 1, 0.215686)
+layout_mode = 2
+texture = ExtResource("2_sj01d")
+
+[node name="Red" type="TextureRect" parent="DNA Panel/DNA Container/DNA Strands Container"]
+modulate = Color(1, 1, 1, 0.215686)
+layout_mode = 2
+texture = ExtResource("4_5lgwx")
+
+[node name="Blue" type="TextureRect" parent="DNA Panel/DNA Container/DNA Strands Container"]
+modulate = Color(1, 1, 1, 0.215686)
+layout_mode = 2
+texture = ExtResource("5_7yn2q")
+
+[node name="Yellow" type="TextureRect" parent="DNA Panel/DNA Container/DNA Strands Container"]
+modulate = Color(1, 1, 1, 0.215686)
+layout_mode = 2
+texture = ExtResource("6_7y50n")

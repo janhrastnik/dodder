@@ -19,6 +19,7 @@ var start_timer: Timer = null
 var qte_display : HBoxContainer = null
 @onready var sprite: AnimatedSprite2D = get_node("Sprite")
 @onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
+@onready var shape: CollisionShape2D = get_node("Shape")
 
 var shake_sound: AudioStreamPlayer = null
 var harvest_sound: AudioStreamPlayer = null
@@ -34,6 +35,9 @@ var qte_countdown = null
 var is_depleted = false # ko nutrient_count reacha 0
 var is_animating = false # da lahko "zamrznemo" ene stvari
 var has_stemrunner = false
+
+# dna strands
+var dna_strand = null
 
 var rng = RandomNumberGenerator.new()
 
@@ -88,8 +92,11 @@ func _ready() -> void:
 	# signals
 	qte_timer.connect("timeout", on_quicktime_timer_timeout)
 	start_timer.connect("timeout", on_start_timer_timeout)
-	connect("body_entered", on_body_entered)
-	connect("body_exited", on_body_exited)
+	connect("area_entered", on_body_entered)
+	connect("area_exited", on_body_exited)
+	
+	# development
+	#shape.disabled = true
 
 func _input(event):
 	if dodder and not is_animating:
@@ -273,3 +280,7 @@ func on_body_entered(body):
 func on_body_exited(body):
 	if body is Dodder:
 		hide_popup_text()
+
+## rng, če ima plant dna ali ne
+func roll_for_dna_strand():
+	var num = rng.randi_range(0, 10)

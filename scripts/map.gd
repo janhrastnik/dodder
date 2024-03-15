@@ -16,10 +16,7 @@ var dodder: Dodder = null # the player
 func _ready():
 	#spawn_plant_on_random_point("basic_bush")
 	spawn_baby_dodder()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	create_map()
 
 func _input(event):
 	if event.is_action_pressed("click"):
@@ -32,7 +29,6 @@ func _input(event):
 
 func move_cam(pos : Vector2) -> void:
 	camera.slide(pos)
-	
 
 func spawn_plant_on_random_point(plant_name: String):
 	var plant = load("res://scenes/plants/{name}.tscn".format({name=plant_name}))
@@ -54,6 +50,23 @@ func spawn_baby_dodder():
 	dodder = dodder_instance
 	
 	add_child(dodder_instance)
+
+func create_map():
+	for y in range(5):
+		for x in range(5):
+			add_sector(x*128, y*128, "BasicGrass")
+
+func add_sector(x: int, y: int, sector_type: String):
+	var sector_scene = load("res://scenes/sector.tscn")
+	var sector_instance: Sector = sector_scene.instantiate()
+	sector_instance.position.x = x
+	sector_instance.position.y = y
+	
+	var sector_data = SectorData.new()
+	sector_data.sector_type = sector_type
+	
+	sector_instance.sector_data = sector_data
+	add_child(sector_instance)
 
 func click_animation(loc: Vector2):
 	click_circle.position = loc

@@ -1,4 +1,5 @@
 class_name PlantStats
+
 extends Resource
 
 @export var name: String # name that shows up on screen

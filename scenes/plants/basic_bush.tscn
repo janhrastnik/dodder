@@ -98,10 +98,10 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_m4iku"]
-radius = 13.0384
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dvpjk"]
 
 [node name="Basic Bush" type="Area2D"]
+z_index = 1
 script = ExtResource("1_5a35p")
 stats = ExtResource("2_7xw8u")
 
@@ -111,7 +111,7 @@ animation = &"infected"
 autoplay = "idle"
 
 [node name="Shape" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_m4iku")
+shape = SubResource("RectangleShape2D_dvpjk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

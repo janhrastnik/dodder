@@ -1,5 +1,5 @@
 class_name Dodder
-extends CharacterBody2D
+extends Area2D
 
 ## To je class za dodder, ki se premika naokrog in ni attached na ničemer.
 @onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
@@ -15,6 +15,8 @@ enum States {
 	Detached
 }
 
+var has_double_strand = false
+
 # hack, to know when to not display the dodder ui info label
 var areacount = 0
 
@@ -26,16 +28,13 @@ func _input(event):
 		var p = get_global_mouse_position()
 		move_to(p)
 		get_parent().move_cam(p)
-
-func _process(delta):
 	match state:
 		States.Detached:
-			if Input.is_action_just_pressed("attach") and plant and not plant.is_animating:
+			if event.is_action_pressed("attach") and plant and not plant.is_animating:
 				if not plant.is_depleted:
 					attach()
-		
 		States.Attached:
-			if Input.is_action_just_pressed("detach") and plant and not plant.is_animating:
+			if event.is_action_pressed("detach") and plant and not plant.is_animating:
 				detach()
 	
 ## Fancy movement funkcija. vzame razdaljo med klikom in trenutno pozicijo,
@@ -92,15 +91,15 @@ func change_nutrients(amount : int) -> void:
 
 func set_colisions_disabled(b : bool) -> void:
 	$CollisionShape2D.disabled = b
-	$Area2D/CollisionShape2D.disabled = b
 
-func _on_area_2d_area_entered(area):
+func _on_area_entered(area):
 	if area is Plant:
 		plant = area
 		get_parent().dodder_attachable_event(plant.is_depleted)
 	areacount += 1
 
-func _on_area_2d_area_exited(area):
+
+func _on_area_exited(area):
 	areacount -= 1
 	if areacount == 0 and state == States.Detached:
 		get_parent().dodder_hide_info_text()

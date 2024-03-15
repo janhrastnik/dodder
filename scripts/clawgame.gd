@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var dna: TextureRect = get_node("Background/DNA")
 @onready var win_sound: AudioStreamPlayer = get_node("WinSound")
 @onready var loss_sound: AudioStreamPlayer = get_node("LossSound")
+@onready var drop_sound: AudioStreamPlayer = get_node("DropSound")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,6 +25,7 @@ func _input(event):
 		claw_drop()
 
 func claw_drop():
+	drop_sound.play()
 	var claw_open = load("res://textures/clawgame/claw_open.png")
 	claw.texture = claw_open
 	animation_player.pause()

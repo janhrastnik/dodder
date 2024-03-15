@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://e7ygf4dprp1j"]
+
+[ext_resource type="Script" path="res://scripts/sector.gd" id="1_vj23m"]
+
+[node name="Sector" type="Sprite2D"]
+script = ExtResource("1_vj23m")
