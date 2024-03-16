@@ -120,10 +120,10 @@ func show_popup_text():
 func hide_popup_text():
 	popup_text.hide()
 	
-func show_harvest():
+func show_harvest(nutrient_change: String):
 	popup_text.show()
 	popup_text.get_node("Label").hide()
-	popup_text.get_node("Harvest Label/Label").text = "+{n_yield}".format({n_yield=nutrient_yield})
+	popup_text.get_node("Harvest Label/Label").text = "+{n_yield}".format({n_yield=nutrient_change})
 	popup_text.get_node("Harvest Label").show()
 	popup_text.get_node("AnimationPlayer").play("harvest")
 	
@@ -174,7 +174,8 @@ func begin_stemrunner_phase():
 	is_animating = false
 	
 	var stemrunner = load("res://scenes/minigames/stemrunner.tscn")
-	var stemrunner_instance: CanvasLayer = stemrunner.instantiate()
+	var stemrunner_instance: Stemrunner = stemrunner.instantiate()
+	stemrunner_instance.has_seek_strand = true
 	
 	add_child(stemrunner_instance)
 
@@ -254,9 +255,20 @@ func qte_stop():
 
 func qte_success():
 	harvest_sound.play()
-	dodder.change_nutrients(nutrient_yield)
+	var nutrient_change = 0
+	if dodder.has_double_strand and dodder.has_combo_strand:
+		nutrient_change = nutrient_yield * 2 + dodder.combo
+		dodder.combo += 1
+	elif dodder.has_double_strand:
+		nutrient_change = nutrient_yield * 2
+	elif dodder.has_combo_strand:
+		nutrient_change = nutrient_yield + dodder.combo
+		dodder.combo += 1
+	else:
+		nutrient_change = nutrient_yield
+	dodder.change_nutrients(nutrient_change)
 	qte_stop()
-	show_harvest()
+	show_harvest(str(nutrient_change))
 	
 	nutrient_count -= nutrient_yield
 	if nutrient_count <= 0:
@@ -270,6 +282,7 @@ func qte_failure():
 	start_timer.stop()
 	qte_timer.stop()
 	qte_failure_sound.play()
+	dodder.combo = 0
 	is_animating = true
 	var one: AnimatedSprite2D = qte_display.get_node("One/One Button")
 	var two: AnimatedSprite2D = qte_display.get_node("Two/Two Button")

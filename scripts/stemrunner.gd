@@ -29,6 +29,8 @@ var win_condition = false
 
 var loss_condition = false
 
+var has_seek_strand = false
+
 # textures
 var dodder_head_left = load("res://textures/stemrunner/headleft.png")
 var dodder_head_right = load("res://textures/stemrunner/headright.png")
@@ -81,11 +83,22 @@ func _input(event):
 				change_grid(Direction.Right)
 
 func init_grid():
-	var texture: Texture2D = load("res://textures/stemrunner/hidden.png")
+	var base_texture: Texture2D = load("res://textures/stemrunner/hidden.png")
+	var marked_texture: Texture2D = load("res://textures/stemrunner/marked.png")
+
+	# determine winning tile by rng
+	#win_tile = get_random_tile()
+	win_position = get_random_tile()
+	while win_position == Vector2(0,2):
+		win_position = get_random_tile()
+	#win_position = Vector2(2,2) # for development
 	
 	for i in range(25):
 		var tile = TextureRect.new()
-		tile.texture = texture
+		if Vector2(i%5,floor(i/5)) == win_position and has_seek_strand:
+			tile.texture = marked_texture
+		else:
+			tile.texture = base_texture
 		tile.name = "{x},{y}".format({x=i%5,y=floor(i/5)})
 		grid.add_child(tile)
 		
@@ -93,13 +106,6 @@ func init_grid():
 	previous_tile = current_tile
 	current_tile.texture = dodder_head_left
 	visited.append(head_position)
-	
-	# determine winning tile by rng
-	#win_tile = get_random_tile()
-	win_position = get_random_tile()
-	while win_position == Vector2(0,2):
-		win_position = get_random_tile()
-	#win_position = Vector2(2,2) # for development
 	
 func change_grid(move_direction: Direction):
 	move_sound.play()

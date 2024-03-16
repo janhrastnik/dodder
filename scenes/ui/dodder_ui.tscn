@@ -122,6 +122,7 @@ offset_right = 400.0
 offset_bottom = 100.0
 
 [node name="Label" type="Label" parent="DNA Descriptor"]
+layout_mode = 0
 offset_left = 19.0
 offset_top = 16.0
 offset_right = 381.0

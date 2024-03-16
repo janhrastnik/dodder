@@ -22,6 +22,10 @@ var has_walk_strand = false
 var has_seek_strand = false
 var has_combo_strand = false
 
+var walk_cost_skipped = false
+
+var combo = 0
+
 # hack, to know when to not display the dodder ui info label
 var areacount = 0
 
@@ -64,7 +68,11 @@ func move_to(click_pos: Vector2):
 		animation_player.play("shrink")
 		await get_tree().create_timer(0.3).timeout # počakamo da se animacija zaključi, preden se premaknemo
 		position = point
-		change_nutrients(-1) # stane 1 nutrient, da se premakneš
+		if (has_walk_strand and walk_cost_skipped) or not has_walk_strand:
+			change_nutrients(-1) # stane 1 nutrient, da se premakneš
+			walk_cost_skipped = false
+		else:
+			walk_cost_skipped = true
 		step_sound.play()
 		animation_player.play("grow")
 		await get_tree().create_timer(0.3).timeout
@@ -122,4 +130,4 @@ func get_dna_strand(strand: String):
 	elif strand == "seek":
 		has_seek_strand = true
 	elif strand == "combo":
-		has_seek_strand = true
+		has_combo_strand = true
