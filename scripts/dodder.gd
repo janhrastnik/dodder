@@ -28,7 +28,7 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("click") and state == States.Detached and not is_moving:
 		var p = get_global_mouse_position()
-		if p.x < -64 or p.y < -64:
+		if p.x < -64 or p.y < -64  or p.x > 576 or p.y > 576:
 			print("out of bounds!")
 		else:
 			move_to(p)

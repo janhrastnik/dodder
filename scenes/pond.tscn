@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://dxia84i32knss"]
+
+[ext_resource type="Texture2D" uid="uid://v434pnai7ha6" path="res://textures/pond.png" id="1_fruuo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2aofk"]
+atlas = ExtResource("1_fruuo")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_td1iv"]
+atlas = ExtResource("1_fruuo")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgpu1"]
+atlas = ExtResource("1_fruuo")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awdlf"]
+atlas = ExtResource("1_fruuo")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu2pc"]
+atlas = ExtResource("1_fruuo")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sakj8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2aofk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_td1iv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgpu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awdlf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu2pc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Pond" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_sakj8")
+animation = &"idle"
+autoplay = "idle"
+frame = 4
+frame_progress = 0.0143332

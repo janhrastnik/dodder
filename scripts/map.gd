@@ -3,8 +3,8 @@ extends Node2D
 ## Trenutno je to node za map. Zaenkrat tukaj spawnamo stvari,
 ## in handlamo click event za premik dodderja.
 
-const WIDTH = 128 # potrebno za spawning
-const HEIGHT = 128
+const WIDTH = 640 # potrebno za spawning
+const HEIGHT = 640
 
 @onready var hivemind: HivemindSingleton = get_node("/root/Hivemind") # global gamedata
 @onready var camera: Camera2D = get_node("Camera2D")
@@ -17,16 +17,19 @@ var dodder: Dodder = null # the player
 var sector_scene = load("res://scenes/sector.tscn")
 var dodder_scene = load("res://scenes/dodder/dodder.tscn")
 
+var rng = RandomNumberGenerator.new()
+
 func _ready():
 	spawn_baby_dodder()
 	create_map()
 	create_border()
+	rng.randomize()
 
 func _input(event):
 	if event.is_action_pressed("click"):
 		if dodder:
 			var pos = get_local_mouse_position()
-			if pos.x < -64 or pos.y < -64:
+			if pos.x < -64 or pos.y < -64 or pos.x > 576 or pos.y > 576:
 				out_of_bounds_animation(pos)
 			else:
 				click_animation(pos)
@@ -43,9 +46,28 @@ func spawn_baby_dodder():
 	add_child(dodder_instance)
 
 func create_map():
+	var lottery = Array(range(25))
+	var pond_index = randi_range(0, 24)
+	lottery.remove_at(pond_index)
+	
+	var index = 0
+	
+	var forest_indices = []
+	for i in range(5):
+		print(len(lottery))
+		var forest_index = randi_range(0, len(lottery)-1)
+		forest_indices.append(lottery[forest_index])
+		lottery.remove_at(forest_index)
+	
 	for y in range(5):
 		for x in range(5):
-			add_sector(x*128, y*128, "BasicGrass")
+			if index == pond_index:
+				add_sector(x*128, y*128, "Pond")
+			elif index in forest_indices:
+				add_sector(x*128, y*128, "BasicForest")
+			else:
+				add_sector(x*128, y*128, "BasicGrass")
+			index += 1
 
 func add_sector(x: int, y: int, sector_type: String):
 	var sector_instance: Sector = sector_scene.instantiate()

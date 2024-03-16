@@ -109,10 +109,10 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_cai1t"]
-radius = 13.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ljmyw"]
 
 [node name="Fancy Bush" type="Area2D"]
+z_index = 1
 script = ExtResource("1_l1ybg")
 stats = SubResource("Resource_s6rdw")
 
@@ -122,7 +122,7 @@ animation = &"infected"
 autoplay = "idle"
 
 [node name="Shape" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_cai1t")
+shape = SubResource("RectangleShape2D_ljmyw")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

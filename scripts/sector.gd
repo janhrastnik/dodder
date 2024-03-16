@@ -9,8 +9,17 @@ const HEIGHT = 128
 
 var rng = RandomNumberGenerator.new()
 
+# plant
 var basic_bush = load("res://scenes/plants/basic_bush.tscn")
-var basic_grass = load("res://textures/ground_block.png")
+var fancy_bush = load("res://scenes/plants/fancy_bush.tscn")
+var basic_tree = load("res://scenes/plants/basic_tree.tscn")
+
+# ground
+var basic_grass = load("res://textures/basic_grass.png")
+var basic_grass2 = load("res://textures/basic_grass2.png")
+var basic_forest = load("res://textures/basic_forest.png")
+var basic_forest2 = load("res://textures/basic_forest2.png")
+var pond_packed = load("res://scenes/pond.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,9 +27,25 @@ func _ready():
 	
 	sector = sector_data.sector_type
 
-	if sector == "BasicGrass":
-		#print("here")
-		texture = basic_grass
+	if sector == "Pond":
+		var pond_instance = pond_packed.instantiate()
+		add_child(pond_instance)
+	elif sector == "BasicForest":
+		var coinflip = randi_range(1, 2)
+		if coinflip == 1:
+			texture = basic_forest
+		else:
+			texture = basic_forest2
+		
+		var plant_count = rng.randi_range(3, 8)
+		for i in range(plant_count):
+			spawn_plant_on_random_point("basic_tree")
+	elif sector == "BasicGrass":
+		var coinflip = randi_range(1, 2)
+		if coinflip == 1:
+			texture = basic_grass
+		else:
+			texture = basic_grass2
 		
 		var plant_count = rng.randi_range(3, 8)
 		for i in range(plant_count):
@@ -30,7 +55,9 @@ func spawn_plant_on_random_point(plant_name: String):
 	var plant;
 	if plant_name == "basic_bush":
 		plant = basic_bush
-	var plant_instance: Area2D = plant.instantiate()
+	elif plant_name == "basic_tree":
+		plant = basic_tree
+	var plant_instance: Plant = plant.instantiate()
 	
 	var x = rng.randi_range(-WIDTH/2, WIDTH/2)
 	var y = rng.randi_range(-HEIGHT/2, HEIGHT/2)

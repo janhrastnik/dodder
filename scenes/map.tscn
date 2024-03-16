@@ -60,7 +60,7 @@ text = "Can't cross the road!"
 label_settings = SubResource("LabelSettings_8oik0")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(64, 64)
+position = Vector2(320, 320)
 zoom = Vector2(4, 4)
 script = ExtResource("3_lde8x")
 

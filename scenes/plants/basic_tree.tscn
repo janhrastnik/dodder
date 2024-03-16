@@ -1,14 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://dtv5p6wsnx156"]
+[gd_scene load_steps=20 format=3 uid="uid://dtv5p6wsnx156"]
 
 [ext_resource type="Script" path="res://scripts/plant.gd" id="1_6qwao"]
 [ext_resource type="Script" path="res://scripts/plant_stat_resource.gd" id="2_a8xxo"]
 [ext_resource type="Texture2D" uid="uid://dydt80e1ik8q2" path="res://textures/basic_tree.png" id="2_ag8bj"]
+[ext_resource type="AnimationLibrary" uid="uid://dkxxew7b6kfl0" path="res://animations/plant-shake.res" id="4_3by21"]
 
 [sub_resource type="Resource" id="Resource_p1xom"]
 script = ExtResource("2_a8xxo")
 name = "Basic Tree"
-nutrient_count = 0
-nutrient_yield = 0
+nutrient_count = 75
+nutrient_yield = 15
 has_stemrunner = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hrk0c"]
@@ -35,6 +36,30 @@ region = Rect2(128, 0, 32, 32)
 atlas = ExtResource("2_ag8bj")
 region = Rect2(160, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_edlhq"]
+atlas = ExtResource("2_ag8bj")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0v6o"]
+atlas = ExtResource("2_ag8bj")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6blx"]
+atlas = ExtResource("2_ag8bj")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1f3n4"]
+atlas = ExtResource("2_ag8bj")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udhjr"]
+atlas = ExtResource("2_ag8bj")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7d4b"]
+atlas = ExtResource("2_ag8bj")
+region = Rect2(352, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_hg7ar"]
 animations = [{
 "frames": [{
@@ -59,21 +84,49 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 6.0
+}, {
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_edlhq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0v6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6blx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1f3n4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udhjr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7d4b")
+}],
+"loop": true,
+"name": &"infected",
+"speed": 6.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bpw7w"]
-radius = 13.0384
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khkbk"]
+size = Vector2(20, 23)
 
 [node name="Basic Tree" type="Area2D"]
+z_index = 1
 script = ExtResource("1_6qwao")
 stats = SubResource("Resource_p1xom")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hg7ar")
 animation = &"idle"
-frame_progress = 0.9537
+autoplay = "idle"
 
 [node name="Shape" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_bpw7w")
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_khkbk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"plant-shake": ExtResource("4_3by21")
+}
