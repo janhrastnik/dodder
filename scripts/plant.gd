@@ -35,6 +35,7 @@ var qte_countdown = null
 var is_depleted = false # ko nutrient_count reacha 0
 var is_animating = false # da lahko "zamrznemo" ene stvari
 var has_stemrunner = false
+var is_harvest_phase = false
 
 # dna strands
 var dna_strand = null
@@ -89,6 +90,8 @@ func _ready() -> void:
 	qte_failure_sound.volume_db = -7
 	add_child(qte_failure_sound)
 
+	roll_for_dna_strand()
+
 	# signals
 	qte_timer.connect("timeout", on_quicktime_timer_timeout)
 	start_timer.connect("timeout", on_start_timer_timeout)
@@ -99,7 +102,7 @@ func _ready() -> void:
 	#shape.disabled = true
 
 func _input(event):
-	if dodder and not is_animating:
+	if dodder and not is_animating and is_harvest_phase:
 		if ((event.is_action_pressed("QTE1") and qte_prompt == 1) \
 		or (event.is_action_pressed("QTE2") and qte_prompt == 2) \
 		or (event.is_action_pressed("QTE3") and qte_prompt == 3)) \
@@ -143,6 +146,8 @@ func attach(d : Dodder) -> void:
 		begin_harvest_phase()
 	
 func detach() -> void:
+	sprite.modulate = Color(0.5, 0.5, 0.5)
+	is_depleted = true
 	qte_stop()
 	start_timer.stop()
 	qte_display.visible = false
@@ -172,6 +177,10 @@ func stemrunner_win():
 	get_node("Stemrunner").call_deferred("queue_free")
 	begin_harvest_phase()
 
+func stemrunner_loss():
+	get_node("Stemrunner").call_deferred("queue_free")
+	depleted_event()
+
 func begin_harvest_phase():
 	# show the phase popup animation
 	show_phase_popup("Harvest Phase")
@@ -179,8 +188,24 @@ func begin_harvest_phase():
 	await get_tree().create_timer(1.8).timeout
 	is_animating = false
 	
-	qte_display.visible = true
+	qte_display.show()
 	start_timer.start()
+	is_harvest_phase = true
+
+func begin_theft_phase():
+	# end harvest phase
+	qte_display.hide()
+	start_timer.stop()
+	is_harvest_phase = false
+	
+	# show the phase popup animation
+	show_phase_popup("Dna Theft Phase")
+	is_animating = true
+	await get_tree().create_timer(1.8).timeout
+	is_animating = false
+	
+	var clawgame_packed = load("res://scenes/minigames/clawgame.tscn")
+	
 
 func qte_start():
 	qte_indicator_sound.play()
@@ -222,7 +247,11 @@ func qte_success():
 	
 	nutrient_count -= nutrient_yield
 	if nutrient_count <= 0:
-		depleted_event()
+		if dna_strand:
+			# we begin the clawgame
+			begin_theft_phase()
+		else:
+			depleted_event()
 
 func qte_failure():
 	start_timer.stop()
@@ -253,7 +282,11 @@ func qte_failure():
 	# punishment for failure is unrealised yield
 	nutrient_count -= nutrient_yield
 	if nutrient_count <= 0:
-		depleted_event()
+		if dna_strand:
+			# we begin the clawgame
+			begin_theft_phase()
+		else:
+			depleted_event()
 
 func on_quicktime_timer_timeout():
 	qte_stop()
@@ -269,8 +302,6 @@ func on_start_timer_timeout():
 			qte_countdown -= 1
 
 func depleted_event():
-	sprite.modulate = Color(0.5, 0.5, 0.5)
-	is_depleted = true
 	dodder.detach()
 
 func on_body_entered(body):
@@ -283,4 +314,22 @@ func on_body_exited(body):
 
 ## rng, če ima plant dna ali ne
 func roll_for_dna_strand():
-	var num = rng.randi_range(0, 10)
+	var roll = rng.randi_range(1, 1)
+	if roll == 1:
+		var strand = rng.randi_range(1, 4)
+		if strand == 1:
+			# double dna
+			sprite.modulate = Color.LIME_GREEN
+			dna_strand = "double"
+		elif strand == 2:
+			# better walk
+			sprite.modulate = Color.SALMON
+			dna_strand = "walk"
+		elif strand == 3:
+			# stemrunner seeking
+			sprite.modulate = Color.CORNFLOWER_BLUE
+			dna_strand = "seek"
+		else:
+			# combo
+			sprite.modulate = Color.GOLD
+			dna_strand = "combo"

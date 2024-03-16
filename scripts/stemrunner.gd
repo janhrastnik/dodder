@@ -3,6 +3,7 @@ extends CanvasLayer
 @onready var grid: GridContainer = get_node("GridContainer")
 @onready var move_sound: AudioStreamPlayer = get_node("MoveSound")
 @onready var win_sound: AudioStreamPlayer = get_node("WinSound")
+@onready var loss_sound: AudioStreamPlayer = get_node("LossSound")
 @onready var timer: Timer = get_node("Timer")
 @onready var timer_label: Label = get_node("Timer Panel/Timer Label") 
 
@@ -23,6 +24,8 @@ var previous_tile: TextureRect = null
 var win_position: Vector2 = Vector2(0, 0)
 
 var win_condition = false
+
+var loss_condition = false
 
 # textures
 var dodder_head_left = load("res://textures/stemrunner/headleft.png")
@@ -54,13 +57,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	diff += delta
-	if diff > 0.5:
-		timer_label.text = str(round(timer.time_left)) + " seconds left!"
-		diff = 0
+	timer_update(delta)
 
 func _input(event):
-	if not win_condition:
+	if not win_condition and not loss_condition:
 		if event.is_action_pressed("up") and direction != Direction.Down:
 			if head_position.y > 0 and not Vector2(head_position.x, head_position.y-1) in visited:
 				head_position.y -= 1
@@ -157,11 +157,31 @@ func change_grid(move_direction: Direction):
 		win()
 
 func get_random_tile() -> Vector2:
-	var x = rng.randi_range(0, 5)
-	var y = rng.randi_range(0, 5)
+	var x = rng.randi_range(0, 4)
+	var y = rng.randi_range(0, 4)
 	return Vector2(x, y)
 
 func win():
 	win_sound.play()
 	await get_tree().create_timer(1.0).timeout
 	get_parent().stemrunner_win()
+
+func loss():
+	loss_sound.play()
+	loss_condition = true
+	await get_tree().create_timer(1.0).timeout
+	get_parent().stemrunner_loss()
+
+func _on_timer_timeout():
+	loss()
+
+func timer_update(delta: float):
+	if win_condition:
+		timer_label.text = "Found the nutrient storage!"
+	elif loss_condition:
+		timer_label.text = "Time's out!"
+	else:
+		diff += delta
+		if diff > 0.5:
+			timer_label.text = str(round(timer.time_left)) + " seconds left!"
+			diff = 0

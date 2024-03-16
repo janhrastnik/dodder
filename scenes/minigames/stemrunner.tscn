@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://400qin8ypn3m"]
+[gd_scene load_steps=10 format=3 uid="uid://400qin8ypn3m"]
 
 [ext_resource type="Script" path="res://scripts/stemrunner.gd" id="1_y4mi7"]
 [ext_resource type="AudioStream" uid="uid://camckhv021g51" path="res://audio/sfx/stemrunner.wav" id="2_5sxjx"]
 [ext_resource type="AudioStream" uid="uid://diiov6qpe0g2a" path="res://audio/sfx/stemrunner_win.wav" id="3_lk6wk"]
+[ext_resource type="AudioStream" uid="uid://b0h7mcerumnf8" path="res://audio/sfx/qte_failure.wav" id="3_q86bk"]
+[ext_resource type="Texture2D" uid="uid://c3i8oipo3sor1" path="res://textures/ui/arrow_up.png" id="4_orn4o"]
+[ext_resource type="Texture2D" uid="uid://2lowisg7lb7v" path="res://textures/ui/arrow_left.png" id="5_0tuut"]
+[ext_resource type="Texture2D" uid="uid://dj6tu8j37spr0" path="res://textures/ui/arrow_down.png" id="6_en2j1"]
+[ext_resource type="Texture2D" uid="uid://iuo71pke0cu4" path="res://textures/ui/arrow_right.png" id="7_8s57c"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e2ipd"]
 
 [node name="Stemrunner" type="CanvasLayer"]
 script = ExtResource("1_y4mi7")
@@ -27,6 +34,9 @@ columns = 5
 stream = ExtResource("2_5sxjx")
 volume_db = -6.0
 
+[node name="LossSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_q86bk")
+
 [node name="WinSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_lk6wk")
 
@@ -36,9 +46,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -150.0
+offset_left = -175.0
 offset_top = -140.0
-offset_right = 150.0
+offset_right = 175.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -47,7 +57,7 @@ grow_vertical = 0
 layout_mode = 0
 offset_left = 16.0
 offset_top = 15.0
-offset_right = 284.0
+offset_right = 334.0
 offset_bottom = 104.0
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -55,3 +65,56 @@ vertical_alignment = 1
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
 autostart = true
+
+[node name="Arrow Hints" type="VBoxContainer" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -392.0
+offset_top = -130.0
+offset_bottom = 130.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Top Row" type="HBoxContainer" parent="Arrow Hints"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Arrow Hints/Top Row"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Up Arrow" type="TextureRect" parent="Arrow Hints/Top Row"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("4_orn4o")
+
+[node name="Control2" type="Control" parent="Arrow Hints/Top Row"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Bottom Row" type="HBoxContainer" parent="Arrow Hints"]
+layout_mode = 2
+
+[node name="Left Arrow" type="TextureRect" parent="Arrow Hints/Bottom Row"]
+layout_mode = 2
+texture = ExtResource("5_0tuut")
+
+[node name="Down Arrow" type="TextureRect" parent="Arrow Hints/Bottom Row"]
+layout_mode = 2
+texture = ExtResource("6_en2j1")
+
+[node name="Right Arrow" type="TextureRect" parent="Arrow Hints/Bottom Row"]
+layout_mode = 2
+texture = ExtResource("7_8s57c")
+
+[node name="Label" type="Label" parent="Arrow Hints"]
+layout_mode = 2
+text = "Use the arrow keys to move.
+find the nutrient storage!"
+label_settings = SubResource("LabelSettings_e2ipd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

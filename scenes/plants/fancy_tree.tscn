@@ -1,8 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://bn5d7lr18eg71"]
+[gd_scene load_steps=20 format=3 uid="uid://bn5d7lr18eg71"]
 
 [ext_resource type="Script" path="res://scripts/plant.gd" id="1_hjkp7"]
+[ext_resource type="Script" path="res://scripts/plant_stat_resource.gd" id="2_63l2i"]
 [ext_resource type="Texture2D" uid="uid://dy1a0xspo6vsj" path="res://textures/fancy_tree.png" id="2_u8kr0"]
 [ext_resource type="AnimationLibrary" uid="uid://dkxxew7b6kfl0" path="res://animations/plant-shake.res" id="3_iw8gp"]
+
+[sub_resource type="Resource" id="Resource_peij1"]
+script = ExtResource("2_63l2i")
+name = "Fancy tree"
+nutrient_count = 150
+nutrient_yield = 30
+has_stemrunner = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tlqyb"]
 atlas = ExtResource("2_u8kr0")
@@ -107,10 +115,12 @@ size = Vector2(24, 28)
 [node name="Fancy Tree" type="Area2D"]
 z_index = 1
 script = ExtResource("1_hjkp7")
+stats = SubResource("Resource_peij1")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w0wau")
-animation = &"infected"
+animation = &"idle"
+autoplay = "idle"
 
 [node name="Shape" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)

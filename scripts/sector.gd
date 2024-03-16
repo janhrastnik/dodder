@@ -13,6 +13,7 @@ var rng = RandomNumberGenerator.new()
 var basic_bush = load("res://scenes/plants/basic_bush.tscn")
 var fancy_bush = load("res://scenes/plants/fancy_bush.tscn")
 var basic_tree = load("res://scenes/plants/basic_tree.tscn")
+var fancy_tree = load("res://scenes/plants/fancy_tree.tscn")
 
 # ground
 var basic_grass = load("res://textures/basic_grass.png")
@@ -39,7 +40,11 @@ func _ready():
 		
 		var plant_count = rng.randi_range(3, 8)
 		for i in range(plant_count):
-			spawn_plant_on_random_point("basic_tree")
+			var fancy_check = randi_range(1, 10)
+			if fancy_check == 10:
+				spawn_plant_on_random_point(fancy_tree)
+			else:
+				spawn_plant_on_random_point(basic_tree)
 	elif sector == "BasicGrass":
 		var coinflip = randi_range(1, 2)
 		if coinflip == 1:
@@ -49,14 +54,13 @@ func _ready():
 		
 		var plant_count = rng.randi_range(3, 8)
 		for i in range(plant_count):
-			spawn_plant_on_random_point("basic_bush")
+			var fancy_check = randi_range(1, 10)
+			if fancy_check == 10:
+				spawn_plant_on_random_point(fancy_bush)
+			else:
+				spawn_plant_on_random_point(basic_bush)
 
-func spawn_plant_on_random_point(plant_name: String):
-	var plant;
-	if plant_name == "basic_bush":
-		plant = basic_bush
-	elif plant_name == "basic_tree":
-		plant = basic_tree
+func spawn_plant_on_random_point(plant: PackedScene):
 	var plant_instance: Plant = plant.instantiate()
 	
 	var x = rng.randi_range(-WIDTH/2, WIDTH/2)
