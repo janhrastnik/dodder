@@ -18,6 +18,9 @@ enum States {
 var is_moving = false
 
 var has_double_strand = false
+var has_walk_strand = false
+var has_seek_strand = false
+var has_combo_strand = false
 
 # hack, to know when to not display the dodder ui info label
 var areacount = 0
@@ -109,3 +112,14 @@ func _on_area_exited(area):
 	if areacount == 0 and state == States.Detached:
 		get_parent().dodder_hide_info_text()
 		plant = null
+
+func get_dna_strand(strand: String):
+	get_parent().update_dna_strand_ui(strand)
+	if strand == "double":
+		has_double_strand = true
+	elif strand == "walk":
+		has_walk_strand = true
+	elif strand == "seek":
+		has_seek_strand = true
+	elif strand == "combo":
+		has_seek_strand = true

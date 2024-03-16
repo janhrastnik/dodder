@@ -115,3 +115,25 @@ texture = ExtResource("5_7yn2q")
 modulate = Color(1, 1, 1, 0.215686)
 layout_mode = 2
 texture = ExtResource("6_7y50n")
+
+[node name="DNA Descriptor" type="Panel" parent="."]
+visible = false
+offset_right = 400.0
+offset_bottom = 100.0
+
+[node name="Label" type="Label" parent="DNA Descriptor"]
+offset_left = 19.0
+offset_top = 16.0
+offset_right = 381.0
+offset_bottom = 84.0
+text = "describes the dna strand"
+autowrap_mode = 2
+
+[connection signal="mouse_entered" from="DNA Panel/DNA Container/DNA Strands Container/Green" to="." method="_on_green_mouse_entered"]
+[connection signal="mouse_exited" from="DNA Panel/DNA Container/DNA Strands Container/Green" to="." method="_on_green_mouse_exited"]
+[connection signal="mouse_entered" from="DNA Panel/DNA Container/DNA Strands Container/Red" to="." method="_on_red_mouse_entered"]
+[connection signal="mouse_exited" from="DNA Panel/DNA Container/DNA Strands Container/Red" to="." method="_on_red_mouse_exited"]
+[connection signal="mouse_entered" from="DNA Panel/DNA Container/DNA Strands Container/Blue" to="." method="_on_blue_mouse_entered"]
+[connection signal="mouse_exited" from="DNA Panel/DNA Container/DNA Strands Container/Blue" to="." method="_on_blue_mouse_exited"]
+[connection signal="mouse_entered" from="DNA Panel/DNA Container/DNA Strands Container/Yellow" to="." method="_on_yellow_mouse_entered"]
+[connection signal="mouse_exited" from="DNA Panel/DNA Container/DNA Strands Container/Yellow" to="." method="_on_yellow_mouse_exited"]

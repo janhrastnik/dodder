@@ -36,9 +36,11 @@ volume_db = -6.0
 
 [node name="LossSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_q86bk")
+volume_db = -7.0
 
 [node name="WinSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_lk6wk")
+volume_db = -7.0
 
 [node name="Timer Panel" type="Panel" parent="."]
 anchors_preset = 7

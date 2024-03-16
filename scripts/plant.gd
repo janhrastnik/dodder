@@ -156,6 +156,11 @@ func detach() -> void:
 	animation_player.play("plant-shake/shake")
 	await get_tree().create_timer(0.1).timeout
 	sprite.animation = "idle"
+	
+	if get_node_or_null("Stemrunner"):
+		get_node("Stemrunner").call_deferred("queue_free")
+	if get_node_or_null("Clawgame"):
+		get_node("Clawgame").call_deferred("queue_free")
 
 func show_phase_popup(phase_text: String):
 	popup_text.get_node("Phase Sign/Panel/Label").text = phase_text
@@ -181,6 +186,13 @@ func stemrunner_loss():
 	get_node("Stemrunner").call_deferred("queue_free")
 	depleted_event()
 
+func clawgame_win():
+	dodder.get_dna_strand(dna_strand)
+	dodder.detach()
+
+func clawgame_loss():
+	dodder.detach()
+
 func begin_harvest_phase():
 	# show the phase popup animation
 	show_phase_popup("Harvest Phase")
@@ -205,7 +217,8 @@ func begin_theft_phase():
 	is_animating = false
 	
 	var clawgame_packed = load("res://scenes/minigames/clawgame.tscn")
-	
+	var clawgame_instance = clawgame_packed.instantiate()
+	add_child(clawgame_instance)
 
 func qte_start():
 	qte_indicator_sound.play()

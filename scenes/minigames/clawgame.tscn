@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://baeaoqujlmdjf"]
+[gd_scene load_steps=11 format=3 uid="uid://baeaoqujlmdjf"]
 
 [ext_resource type="Script" path="res://scripts/clawgame.gd" id="1_4xsgq"]
 [ext_resource type="Texture2D" uid="uid://cl1xby65p35wk" path="res://textures/clawgame/dna_chamber.png" id="1_32s10"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://diiov6qpe0g2a" path="res://audio/sfx/stemrunner_win.wav" id="5_a8m6u"]
 [ext_resource type="AudioStream" uid="uid://b0h7mcerumnf8" path="res://audio/sfx/qte_failure.wav" id="6_irpej"]
 [ext_resource type="AudioStream" uid="uid://bwmay42n8hv1v" path="res://audio/sfx/qte_indicator.wav" id="7_fw34s"]
+[ext_resource type="Texture2D" uid="uid://dj6tu8j37spr0" path="res://textures/ui/arrow_down.png" id="8_cdolg"]
 
 [sub_resource type="Animation" id="Animation_kan24"]
 resource_name = "claw_movement"
@@ -49,7 +50,8 @@ texture = ExtResource("1_32s10")
 
 [node name="Claw" type="TextureRect" parent="Background"]
 layout_mode = 0
-offset_right = 64.0
+offset_left = 134.4
+offset_right = 198.4
 offset_bottom = 64.0
 texture = ExtResource("2_2247j")
 
@@ -77,3 +79,27 @@ volume_db = -7.0
 [node name="DropSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_fw34s")
 volume_db = -7.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("8_cdolg")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Press the down arrow key 
+at the correct time to pickup
+the dna strand!"
+horizontal_alignment = 1

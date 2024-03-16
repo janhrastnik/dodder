@@ -1,3 +1,5 @@
+class_name ClawGame
+
 extends CanvasLayer
 
 @onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
@@ -75,6 +77,14 @@ func win():
 	animation_player.add_animation_library("win", lib)
 	
 	animation_player.play("win/hoist")
+	
+	await get_tree().create_timer(3.0).timeout
+	
+	get_parent().clawgame_win()
 
 func loss():
 	loss_sound.play()
+	
+	await get_tree().create_timer(3.0).timeout
+	
+	get_parent().clawgame_loss()

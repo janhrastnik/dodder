@@ -54,7 +54,6 @@ func create_map():
 	
 	var forest_indices = []
 	for i in range(5):
-		print(len(lottery))
 		var forest_index = randi_range(0, len(lottery)-1)
 		forest_indices.append(lottery[forest_index])
 		lottery.remove_at(forest_index)
@@ -151,6 +150,9 @@ func dodder_hide_info_text():
 
 func refresh_nutrient_count(nutrients: int):
 	dodder_ui.refresh_nutrient_count(nutrients)
+
+func update_dna_strand_ui(strand: String):
+	dodder_ui.show_dna_strand(strand)
 
 func _on_music_finished():
 	music.play()

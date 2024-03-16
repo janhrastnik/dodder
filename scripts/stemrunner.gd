@@ -1,3 +1,5 @@
+class_name Stemrunner
+
 extends CanvasLayer
 
 @onready var grid: GridContainer = get_node("GridContainer")
