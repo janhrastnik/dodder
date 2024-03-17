@@ -10,6 +10,8 @@ func _ready():
 func attached_event():
 	info_label.visible = true
 	info_label.text = "Press spacebar to detach"
+	
+	hide_win_tutorial()
 
 func hide_info_text():
 	info_label.visible = false
@@ -22,7 +24,7 @@ func attachable_event(is_depleted: bool):
 		info_label.text = "Press e to attach"
 
 func refresh_nutrient_count(nutrients: int):
-	get_node("Nutrients Panel/Nutrients Container/Nutrients Label").text = "Nutrients: {count}".format({count=nutrients})
+	get_node("Nutrients Panel/Nutrients Container/Nutrients Label").text = "{count}/1000".format({count=nutrients})
 
 func show_dna_strand(strand: String):
 	if strand == "double":
@@ -33,6 +35,12 @@ func show_dna_strand(strand: String):
 		get_node("DNA Panel/DNA Container/DNA Strands Container/Blue").modulate = Color(1, 1, 1)
 	elif strand == "combo":
 		get_node("DNA Panel/DNA Container/DNA Strands Container/Yellow").modulate = Color(1, 1, 1)
+
+func show_win_tutorial():
+	$WinTutorial.visible = true
+	
+func hide_win_tutorial():
+	$WinTutorial.visible = false
 
 func _on_green_mouse_entered():
 	dna_descriptor.show()

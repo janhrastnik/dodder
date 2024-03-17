@@ -107,10 +107,11 @@ stats = ExtResource("2_7xw8u")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gg6vi")
-animation = &"infected"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="Shape" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_dvpjk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

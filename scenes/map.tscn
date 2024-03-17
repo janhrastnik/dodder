@@ -1,10 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bo5cge52r5tdd"]
+[gd_scene load_steps=13 format=3 uid="uid://bo5cge52r5tdd"]
 
 [ext_resource type="Script" path="res://scripts/map.gd" id="1_a7gl2"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="3_lde8x"]
 [ext_resource type="PackedScene" uid="uid://6tv40q4iw0ue" path="res://scenes/ui/dodder_ui.tscn" id="4_yy8mp"]
 [ext_resource type="Texture2D" uid="uid://blc7qjosuq3a5" path="res://textures/ui/click_circle.png" id="5_v68f6"]
 [ext_resource type="AudioStream" uid="uid://co4gf2t7vsf8j" path="res://audio/music/Morning.mp3" id="9_qkdep"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cj8rp"]
+font_size = 8
 
 [sub_resource type="LabelSettings" id="LabelSettings_8oik0"]
 font_size = 8
@@ -48,6 +51,13 @@ animations = [{
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_a7gl2")
+
+[node name="MoveTutorial" type="Label" parent="."]
+z_index = 2
+offset_right = 70.0
+offset_bottom = 21.0
+text = "Click to move"
+label_settings = SubResource("LabelSettings_cj8rp")
 
 [node name="Out Of Bounds Label" type="Label" parent="."]
 visible = false
