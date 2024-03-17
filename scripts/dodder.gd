@@ -6,13 +6,14 @@ extends Area2D
 @onready var hivemind: HivemindSingleton = get_node("/root/Hivemind")
 @onready var step_sound: AudioStreamPlayer = get_node("StepSound")
 
-var nutrients : int = 100
+var nutrients : int = 50
 var plant: Plant = null
 
 var state = States.Detached
 enum States {
 	Attached,
-	Detached
+	Detached,
+	GameEnd
 }
 
 var is_moving = false
@@ -104,6 +105,11 @@ func detach():
 func change_nutrients(amount : int) -> void:
 	nutrients += amount
 	get_parent().refresh_nutrient_count(nutrients)
+	
+	if nutrients >= 1000:
+		win()
+	elif nutrients <= 0:
+		loss()
 
 func set_colisions_disabled(b : bool) -> void:
 	$CollisionShape2D.disabled = b
@@ -131,3 +137,30 @@ func get_dna_strand(strand: String):
 		has_seek_strand = true
 	elif strand == "combo":
 		has_combo_strand = true
+
+func win():
+	var win_packed = load("res://scenes/win_screen.tscn")
+	var win_instance = win_packed.instantiate()
+	
+	state = States.GameEnd
+	hide_all_ui()
+	
+	add_child(win_instance)
+
+func loss():
+	var loss_packed = load("res://scenes/loss_screen.tscn")
+	var loss_instance = loss_packed.instantiate()
+	
+	state = States.GameEnd
+	hide_all_ui()
+	
+	add_child(loss_instance)
+
+func hide_all_ui():
+	if plant:
+		plant.qte_display.hide()
+		plant.qte_timer.stop()
+		plant.start_timer.stop()
+		
+	get_parent().dodder_ui.hide()
+	

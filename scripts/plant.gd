@@ -175,7 +175,8 @@ func begin_stemrunner_phase():
 	
 	var stemrunner = load("res://scenes/minigames/stemrunner.tscn")
 	var stemrunner_instance: Stemrunner = stemrunner.instantiate()
-	stemrunner_instance.has_seek_strand = true
+	if dodder.has_seek_strand == true:
+		stemrunner_instance.has_seek_strand = true
 	
 	add_child(stemrunner_instance)
 
@@ -340,7 +341,7 @@ func on_body_exited(body):
 
 ## rng, če ima plant dna ali ne
 func roll_for_dna_strand():
-	var roll = rng.randi_range(1, 1)
+	var roll = rng.randi_range(1, 14)
 	if roll == 1:
 		var strand = rng.randi_range(1, 4)
 		if strand == 1:

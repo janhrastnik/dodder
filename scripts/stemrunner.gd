@@ -95,7 +95,7 @@ func init_grid():
 	
 	for i in range(25):
 		var tile = TextureRect.new()
-		if Vector2(i%5,floor(i/5)) == win_position and has_seek_strand:
+		if Vector2(i%5,floor(i/5)) == win_position and has_seek_strand == true:
 			tile.texture = marked_texture
 		else:
 			tile.texture = base_texture
