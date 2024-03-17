@@ -16,10 +16,6 @@ run/main_scene="res://scenes/menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://textures/starting_fungus.png"
 
-[autoload]
-
-Hivemind="*res://scenes/dodder/hivemind.tscn"
-
 [display]
 
 window/stretch/mode="viewport"

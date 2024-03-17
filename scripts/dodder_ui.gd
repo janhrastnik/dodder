@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-@onready var hivemind: HivemindSingleton = get_node("/root/Hivemind") # global gamedata
 @onready var info_label: Label = get_node("Info Label")
 @onready var dna_descriptor: Panel = get_node("DNA Descriptor")
 

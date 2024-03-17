@@ -48,22 +48,26 @@ offset_right = 40.0004
 offset_bottom = 40.0
 
 [node name="BG Top Left" type="TextureRect" parent="BG"]
+layout_mode = 0
 offset_left = -1152.0
 offset_bottom = 648.0
 texture = ExtResource("1_8it0t")
 
 [node name="BG Top Right" type="TextureRect" parent="BG"]
+layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 texture = ExtResource("1_8it0t")
 
 [node name="BG Bottom Left" type="TextureRect" parent="BG"]
+layout_mode = 0
 offset_left = -1152.0
 offset_top = 648.0
 offset_bottom = 1296.0
 texture = ExtResource("1_8it0t")
 
 [node name="BG Bottom Right" type="TextureRect" parent="BG"]
+layout_mode = 0
 offset_top = 648.0
 offset_right = 1152.0
 offset_bottom = 1296.0

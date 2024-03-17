@@ -7,6 +7,9 @@ var sector: String
 const WIDTH = 128
 const HEIGHT = 128
 
+var x: int = 0
+var y: int = 0
+
 var rng = RandomNumberGenerator.new()
 
 # plant
@@ -26,7 +29,10 @@ var pond_packed = load("res://scenes/pond.tscn")
 func _ready():
 	rng.randomize()
 	
-	sector = sector_data.sector_type
+	if sector_data:
+		sector = sector_data.sector_type
+	else:
+		sector = "Border"
 
 	if sector == "Pond":
 		var pond_instance = pond_packed.instantiate()
