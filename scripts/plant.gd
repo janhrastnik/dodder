@@ -156,6 +156,9 @@ func detach() -> void:
 	
 	$Shape.disabled = true
 	
+	sprite.pause()
+	sprite.frame = 0
+	
 	qte_stop()
 	start_timer.stop()
 	qte_display.visible = false
