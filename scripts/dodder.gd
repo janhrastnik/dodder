@@ -74,8 +74,14 @@ func move_to(click_pos: Vector2):
 		animation_player.play("shrink")
 		await get_tree().create_timer(0.3).timeout # počakamo da se animacija zaključi, preden se premaknemo
 		position = point
+
+		# optimizations
+		var old_x = sector_x
+		var old_y = sector_y
 		find_current_sector()
-		set_enabled_sectors()
+		if old_x != sector_x or old_y == sector_y:
+			set_enabled_sectors()
+
 		if (has_walk_strand and walk_cost_skipped) or not has_walk_strand:
 			change_nutrients(-1) # stane 1 nutrient, da se premakneš
 			walk_cost_skipped = false
@@ -175,8 +181,10 @@ func set_enabled_sectors():
 	var feasible_y = [sector_y - 1, sector_y, sector_y + 1]
 	for sector in map.sectors:
 		if (sector.x in feasible_x) and (sector.y in feasible_y):
+			sector.toggle_plant_processing(true)
 			sector.show()
 		else:
+			sector.toggle_plant_processing(false)
 			sector.hide()
 
 func find_current_sector():

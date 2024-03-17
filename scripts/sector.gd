@@ -12,6 +12,8 @@ var y: int = 0
 
 var rng = RandomNumberGenerator.new()
 
+var plants: Array[Plant] = []
+
 # plant
 var basic_bush = load("res://scenes/plants/basic_bush.tscn")
 var fancy_bush = load("res://scenes/plants/fancy_bush.tscn")
@@ -73,5 +75,12 @@ func spawn_plant_on_random_point(plant: PackedScene):
 	var y = rng.randi_range(-HEIGHT/2, HEIGHT/2)
 	
 	plant_instance.position = Vector2(x,y)
+	plants.append(plant_instance)
 	
 	add_child(plant_instance)
+
+func toggle_plant_processing(toggle: bool):
+	for plant in plants:
+		plant.set_process(toggle)
+		plant.set_process_input(toggle)
+		plant.set_physics_process(toggle)
