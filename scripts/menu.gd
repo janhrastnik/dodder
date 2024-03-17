@@ -1,16 +1,13 @@
 extends CanvasLayer
 
+@onready var how_to_play = get_node("How To Play Panel")
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _input(event):
+	if event.is_action_pressed("detach"):
+		how_to_play.hide()
 
 func _on_how_to_play_pressed():
-	pass # Replace with function body.
+	how_to_play.show()
 
 func _on_button_pressed():
 	var map = load("res://scenes/map.tscn")

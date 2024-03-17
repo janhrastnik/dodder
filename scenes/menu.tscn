@@ -1,9 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://l1q4h5d7xorl"]
+[gd_scene load_steps=12 format=3 uid="uid://l1q4h5d7xorl"]
 
 [ext_resource type="Texture2D" uid="uid://c45r785q6xrww" path="res://textures/ui/menu_background.png" id="1_8it0t"]
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_jqfrd"]
 [ext_resource type="AudioStream" uid="uid://bmgfki0djdf6t" path="res://audio/music/Silver Blue Light.mp3" id="2_v8o2e"]
 [ext_resource type="Texture2D" uid="uid://bqh8qd40lupqd" path="res://textures/ui/title4x.png" id="3_pch73"]
+[ext_resource type="Texture2D" uid="uid://ow7x5a7a63lr" path="res://textures/ui/ui_box_light.png" id="5_17gt2"]
+[ext_resource type="LabelSettings" uid="uid://blh43277stxfv" path="res://styles/blackfont.tres" id="6_1cefs"]
+[ext_resource type="Texture2D" uid="uid://samvqt1r2mgh" path="res://textures/nutrient3.png" id="7_qrpe8"]
+[ext_resource type="Texture2D" uid="uid://eh5r48v8bv6n" path="res://textures/clawgame/dna.png" id="8_8yfei"]
 
 [sub_resource type="Animation" id="Animation_xk357"]
 resource_name = "bg_move"
@@ -26,6 +30,13 @@ tracks/0/keys = {
 _data = {
 "bg_move": SubResource("Animation_xk357")
 }
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kulvp"]
+texture = ExtResource("5_17gt2")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_jqfrd")
@@ -101,6 +112,7 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
+focus_mode = 0
 text = "How To Play"
 
 [node name="Control" type="Control" parent="Button Row"]
@@ -112,6 +124,116 @@ custom_minimum_size = Vector2(188, 0)
 layout_mode = 2
 size_flags_vertical = 4
 text = "Start Game"
+
+[node name="How To Play Panel" type="Panel" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -475.0
+offset_top = -290.0
+offset_right = 475.0
+offset_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_kulvp")
+
+[node name="How To Play" type="VBoxContainer" parent="How To Play Panel"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 25.0
+offset_right = 934.0
+offset_bottom = 484.0
+
+[node name="Premise" type="Label" parent="How To Play Panel/How To Play"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+text = "You play as a dodder, a parasitic plant that steals other plant's nutrients and dna. "
+label_settings = ExtResource("6_1cefs")
+autowrap_mode = 2
+
+[node name="Nutrients" type="HBoxContainer" parent="How To Play Panel/How To Play"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="How To Play Panel/How To Play/Nutrients"]
+layout_mode = 2
+text = "Nutrients: "
+label_settings = ExtResource("6_1cefs")
+
+[node name="TextureRect" type="TextureRect" parent="How To Play Panel/How To Play/Nutrients"]
+layout_mode = 2
+texture = ExtResource("7_qrpe8")
+stretch_mode = 3
+
+[node name="Label2" type="Label" parent="How To Play Panel/How To Play/Nutrients"]
+layout_mode = 2
+text = ", DNA: "
+label_settings = ExtResource("6_1cefs")
+
+[node name="TextureRect2" type="TextureRect" parent="How To Play Panel/How To Play/Nutrients"]
+layout_mode = 2
+texture = ExtResource("8_8yfei")
+
+[node name="Spacer" type="Control" parent="How To Play Panel/How To Play"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="Movement" type="Label" parent="How To Play Panel/How To Play"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+text = "Move around by clicking the left mouse button. Keep in mind that movement costs you nutrients!"
+label_settings = ExtResource("6_1cefs")
+autowrap_mode = 2
+
+[node name="Spacer 2" type="Control" parent="How To Play Panel/How To Play"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="Attach" type="Label" parent="How To Play Panel/How To Play"]
+layout_mode = 2
+text = "Attach to plants by pressing [e]. Detach by pressing [spacebar]. "
+label_settings = ExtResource("6_1cefs")
+
+[node name="Spacer 3" type="Control" parent="How To Play Panel/How To Play"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="Phases" type="Label" parent="How To Play Panel/How To Play"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+text = "After attaching to a plant, you will encounter (some) of the following phases:
+ - Incursion phase: A plant may hide its nutrients. Find them in time!
+ - Harvest phase: Harvest the plant's nutrients by pressing [1], [2], [3] at the correct time!
+ - DNA theft phase: Some plants may contain beneficial mutations. You can obtain these mutations yourself, by taking the plant's dna. "
+label_settings = ExtResource("6_1cefs")
+autowrap_mode = 2
+
+[node name="Spacer 4" type="Control" parent="How To Play Panel/How To Play"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="How To Play Panel/How To Play"]
+layout_mode = 2
+text = "Your objective is to obtain 1000 nutrients! you start with 50 nutrients."
+label_settings = ExtResource("6_1cefs")
+
+[node name="Close Label" type="Label" parent="How To Play Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -403.0
+offset_top = -42.0
+offset_right = -21.0
+offset_bottom = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Press spacebar to close this window"
+label_settings = ExtResource("6_1cefs")
 
 [connection signal="pressed" from="Button Row/How To Play" to="." method="_on_how_to_play_pressed"]
 [connection signal="pressed" from="Button Row/Button" to="." method="_on_button_pressed"]

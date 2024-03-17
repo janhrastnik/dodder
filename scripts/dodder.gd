@@ -6,7 +6,7 @@ extends Area2D
 @onready var hivemind: HivemindSingleton = get_node("/root/Hivemind")
 @onready var step_sound: AudioStreamPlayer = get_node("StepSound")
 
-var nutrients : int = 1
+var nutrients : int = 50
 var plant: Plant = null
 
 var state = States.Detached
@@ -29,6 +29,8 @@ var combo = 0
 
 # hack, to know when to not display the dodder ui info label
 var areacount = 0
+
+var steps = []
 
 func _ready():
 	get_parent().refresh_nutrient_count(nutrients)
@@ -58,7 +60,6 @@ func move_to(click_pos: Vector2):
 	var diff = click_pos - position # vektor od dodderja do klika
 	var dist = diff.length()
 	var step_count = int(dist / 32) # število vmesnih korakov
-	var steps = []
 	
 	for i in range(1, step_count+1):
 		steps.append(position + diff.normalized()*32*i)
@@ -109,6 +110,7 @@ func change_nutrients(amount : int) -> void:
 	if nutrients >= 1000:
 		win()
 	elif nutrients <= 0:
+		steps = [] # stops the dodder from moving
 		loss()
 
 func set_colisions_disabled(b : bool) -> void:

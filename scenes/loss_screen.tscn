@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccmfjbdloqtbk"]
+[gd_scene load_steps=6 format=3 uid="uid://ccmfjbdloqtbk"]
 
 [ext_resource type="Script" path="res://scripts/loss_screen.gd" id="1_6m6ql"]
+[ext_resource type="LabelSettings" uid="uid://blh43277stxfv" path="res://styles/blackfont.tres" id="2_4mcmr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r2dl4"]
 bg_color = Color(0.705882, 0.321569, 0.321569, 0.501961)
@@ -51,3 +52,18 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Press escape to return to the menu"
 label_settings = SubResource("LabelSettings_ah6ko")
+
+[node name="Explain Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = 26.0
+offset_right = 132.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "you ran out of nutrients"
+label_settings = ExtResource("2_4mcmr")
