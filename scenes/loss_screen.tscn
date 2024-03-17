@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccmfjbdloqtbk"]
+[gd_scene load_steps=5 format=3 uid="uid://ccmfjbdloqtbk"]
+
+[ext_resource type="Script" path="res://scripts/loss_screen.gd" id="1_6m6ql"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r2dl4"]
 bg_color = Color(0.705882, 0.321569, 0.321569, 0.501961)
@@ -11,6 +13,7 @@ font_color = Color(0, 0, 0, 1)
 font_color = Color(0, 0, 0, 1)
 
 [node name="Loss Screen" type="CanvasLayer"]
+script = ExtResource("1_6m6ql")
 
 [node name="Panel" type="Panel" parent="."]
 offset_right = 1152.0

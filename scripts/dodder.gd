@@ -6,7 +6,7 @@ extends Area2D
 @onready var hivemind: HivemindSingleton = get_node("/root/Hivemind")
 @onready var step_sound: AudioStreamPlayer = get_node("StepSound")
 
-var nutrients : int = 50
+var nutrients : int = 1
 var plant: Plant = null
 
 var state = States.Detached
