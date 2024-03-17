@@ -33,6 +33,13 @@ func _input(event):
 				out_of_bounds_animation(pos)
 			else:
 				click_animation(pos)
+				
+				if $MoveTutorial.visible:
+					$MoveTutorial.visible = false
+					
+				
+	elif event is InputEventMouseMotion:
+		$MoveTutorial.position = get_local_mouse_position() + Vector2(-30, 10)
 
 func move_cam(pos : Vector2) -> void:
 	camera.slide(pos)

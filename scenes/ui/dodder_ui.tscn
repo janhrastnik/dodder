@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://6tv40q4iw0ue"]
+[gd_scene load_steps=10 format=3 uid="uid://6tv40q4iw0ue"]
 
 [ext_resource type="Script" path="res://scripts/dodder_ui.gd" id="1_12od8"]
 [ext_resource type="Texture2D" uid="uid://degtuoiiypv3g" path="res://textures/nutrient3_64x64.png" id="2_mdxe4"]
@@ -12,6 +12,8 @@ font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_uqgov"]
 font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_uxiuf"]
 
 [node name="Dodder UI" type="CanvasLayer"]
 script = ExtResource("1_12od8")
@@ -79,17 +81,18 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -440.0
-offset_bottom = 170.0
+offset_bottom = 144.0
 grow_horizontal = 0
 
 [node name="DNA Container" type="VBoxContainer" parent="DNA Panel"]
 layout_mode = 0
-offset_left = 22.0
-offset_top = 16.0
-offset_right = 418.0
-offset_bottom = 154.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 420.0
+offset_bottom = 120.0
 
 [node name="DNA Text" type="Label" parent="DNA Panel/DNA Container"]
+visible = false
 layout_mode = 2
 text = "DNA strands:"
 label_settings = SubResource("LabelSettings_uqgov")
@@ -130,6 +133,15 @@ offset_right = 381.0
 offset_bottom = 84.0
 text = "describes the dna strand"
 autowrap_mode = 2
+
+[node name="WinTutorial" type="Label" parent="."]
+z_index = 2
+offset_left = 24.0
+offset_top = 496.0
+offset_right = 504.0
+offset_bottom = 527.0
+text = "Get 1000 nutrients to grow big"
+label_settings = SubResource("LabelSettings_uxiuf")
 
 [connection signal="mouse_entered" from="DNA Panel/DNA Container/DNA Strands Container/Green" to="." method="_on_green_mouse_entered"]
 [connection signal="mouse_exited" from="DNA Panel/DNA Container/DNA Strands Container/Green" to="." method="_on_green_mouse_exited"]

@@ -7,7 +7,7 @@ extends Area2D
 @onready var step_sound: AudioStreamPlayer = get_node("StepSound")
 
 var nutrients : int = 50
-var plant: Plant = null
+var plant : Plant = null
 
 var state = States.Detached
 enum States {
@@ -94,6 +94,7 @@ func attach():
 
 func detach():
 	plant.detach()
+	plant.hide_popup_text()
 	
 	set_colisions_disabled(false)
 	
@@ -117,16 +118,30 @@ func set_colisions_disabled(b : bool) -> void:
 	$CollisionShape2D.disabled = b
 
 func _on_area_entered(area):
-	if area is Plant:
-		plant = area
-		get_parent().dodder_attachable_event(plant.is_depleted)
+	if not (area is Plant):
+		return
+	
+	if plant:
+		plant.hide_popup_text()
+	
+	plant = area
+	
+	plant.show_popup_text()
+	
+	get_parent().dodder_attachable_event(plant.is_depleted)
+	
 	areacount += 1
 
-
 func _on_area_exited(area):
+	if not (area is Plant):
+		return
+		
+		
 	areacount -= 1
 	if areacount == 0 and state == States.Detached:
 		get_parent().dodder_hide_info_text()
+		
+		plant.hide_popup_text()
 		plant = null
 
 func get_dna_strand(strand: String):

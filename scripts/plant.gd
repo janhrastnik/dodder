@@ -340,12 +340,14 @@ func depleted_event():
 	dodder.detach()
 
 func on_body_entered(body):
-	if body is Dodder:
-		show_popup_text()
+	pass
+	#if body is Dodder:
+		#show_popup_text()
 
 func on_body_exited(body):
-	if body is Dodder:
-		hide_popup_text()
+	pass
+	#if body is Dodder:
+		#hide_popup_text()
 
 ## rng, če ima plant dna ali ne
 func roll_for_dna_strand():
