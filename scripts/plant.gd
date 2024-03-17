@@ -39,6 +39,7 @@ var is_harvest_phase = false
 
 # dna strands
 var dna_strand = null
+var dna_icon_instance = null
 
 var rng = RandomNumberGenerator.new()
 
@@ -148,6 +149,8 @@ func attach(d : Dodder) -> void:
 func detach() -> void:
 	sprite.modulate = Color(0.5, 0.5, 0.5)
 	is_depleted = true
+	dna_icon_instance.queue_free()
+	
 	qte_stop()
 	start_timer.stop()
 	qte_display.visible = false
@@ -360,3 +363,8 @@ func roll_for_dna_strand():
 			# combo
 			sprite.modulate = Color.GOLD
 			dna_strand = "combo"
+		
+		var dna_icon = preload("res://scenes/plants/dna_icon.tscn")
+		dna_icon_instance = dna_icon.instantiate()
+		
+		add_child(dna_icon_instance)

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://du1s7a7w6sby4"]
+
+[ext_resource type="Texture2D" uid="uid://dvjbd0re0gps0" path="res://textures/dna_small.png" id="1_s0f8s"]
+
+[node name="DnaSmall" type="Sprite2D"]
+position = Vector2(-6, 8)
+texture = ExtResource("1_s0f8s")
