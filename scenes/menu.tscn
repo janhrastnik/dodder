@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://l1q4h5d7xorl"]
+[gd_scene load_steps=7 format=3 uid="uid://l1q4h5d7xorl"]
 
 [ext_resource type="Texture2D" uid="uid://c45r785q6xrww" path="res://textures/ui/menu_background.png" id="1_8it0t"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_jqfrd"]
+[ext_resource type="AudioStream" uid="uid://bmgfki0djdf6t" path="res://audio/music/Silver Blue Light.mp3" id="2_v8o2e"]
+[ext_resource type="Texture2D" uid="uid://bqh8qd40lupqd" path="res://textures/ui/title4x.png" id="3_pch73"]
 
 [sub_resource type="Animation" id="Animation_xk357"]
 resource_name = "bg_move"
@@ -24,7 +27,8 @@ _data = {
 "bg_move": SubResource("Animation_xk357")
 }
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="Menu" type="CanvasLayer"]
+script = ExtResource("1_jqfrd")
 
 [node name="BG" type="Control" parent="."]
 layout_mode = 3
@@ -59,3 +63,55 @@ libraries = {
 "": SubResource("AnimationLibrary_ewmw7")
 }
 autoplay = "bg_move"
+
+[node name="Menu Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_v8o2e")
+volume_db = -9.0
+autoplay = true
+
+[node name="Title" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -392.0
+offset_top = -164.0
+offset_right = 392.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_pch73")
+stretch_mode = 2
+
+[node name="Button Row" type="HBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -200.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="How To Play" type="Button" parent="Button Row"]
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+text = "How To Play"
+
+[node name="Control" type="Control" parent="Button Row"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Button Row"]
+custom_minimum_size = Vector2(188, 0)
+layout_mode = 2
+size_flags_vertical = 4
+text = "Start Game"
+
+[connection signal="pressed" from="Button Row/How To Play" to="." method="_on_how_to_play_pressed"]
+[connection signal="pressed" from="Button Row/Button" to="." method="_on_button_pressed"]

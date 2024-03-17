@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bmgfki0djdf6t"
+path="res://.godot/imported/Silver Blue Light.mp3-d45916034c924912d2242e16dc89978d.mp3str"
+
+[deps]
+
+source_file="res://audio/music/Silver Blue Light.mp3"
+dest_files=["res://.godot/imported/Silver Blue Light.mp3-d45916034c924912d2242e16dc89978d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

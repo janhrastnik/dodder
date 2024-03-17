@@ -1,0 +1,116 @@
+[gd_scene load_steps=7 format=3 uid="uid://l1q4h5d7xorl"]
+
+[ext_resource type="Texture2D" uid="uid://c45r785q6xrww" path="res://textures/ui/menu_background.png" id="1_8it0t"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_jqfrd"]
+[ext_resource type="AudioStream" uid="uid://bmgfki0djdf6t" path="res://audio/music/Silver Blue Light.mp3" id="2_v8o2e"]
+[ext_resource type="Texture2D" uid="uid://bqh8qd40lupqd" path="res://textures/ui/title4x.png" id="3_pch73"]
+
+[sub_resource type="Animation" id="Animation_xk357"]
+resource_name = "bg_move"
+length = 22.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BG:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 22),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1152, -648)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ewmw7"]
+_data = {
+"bg_move": SubResource("Animation_xk357")
+}
+
+[node name="Menu" type="CanvasLayer"]
+script = ExtResource("1_jqfrd")
+
+[node name="BG" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0004
+offset_bottom = 40.0
+
+[node name="BG Top Left" type="TextureRect" parent="BG"]
+offset_left = -1152.0
+offset_bottom = 648.0
+texture = ExtResource("1_8it0t")
+
+[node name="BG Top Right" type="TextureRect" parent="BG"]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("1_8it0t")
+
+[node name="BG Bottom Left" type="TextureRect" parent="BG"]
+offset_left = -1152.0
+offset_top = 648.0
+offset_bottom = 1296.0
+texture = ExtResource("1_8it0t")
+
+[node name="BG Bottom Right" type="TextureRect" parent="BG"]
+offset_top = 648.0
+offset_right = 1152.0
+offset_bottom = 1296.0
+texture = ExtResource("1_8it0t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ewmw7")
+}
+autoplay = "bg_move"
+
+[node name="Menu Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_v8o2e")
+volume_db = -9.0
+autoplay = true
+
+[node name="Title" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -392.0
+offset_top = -164.0
+offset_right = 392.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_pch73")
+stretch_mode = 2
+
+[node name="Button Row" type="HBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -200.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="How To Play" type="Button" parent="Button Row"]
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+text = "How To Play"
+
+[node name="Control" type="Control" parent="Button Row"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Button Row"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Start Game"
+
+[connection signal="pressed" from="Button Row/How To Play" to="." method="_on_how_to_play_pressed"]
+[connection signal="pressed" from="Button Row/Button" to="." method="_on_button_pressed"]

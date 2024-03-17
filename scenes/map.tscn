@@ -78,6 +78,7 @@ position = Vector2(163, 147)
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_qkdep")
 volume_db = -12.0
+autoplay = true
 
 [node name="Clawgame Test" parent="." instance=ExtResource("10_x8w6s")]
 z_index = 1
