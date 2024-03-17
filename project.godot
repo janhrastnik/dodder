@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="dodder grow big"
+config/version="0.1"
 run/main_scene="res://scenes/menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://textures/icon.svg"
+config/icon="res://textures/starting_fungus.png"
 
 [autoload]
 

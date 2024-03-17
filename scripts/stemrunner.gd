@@ -101,7 +101,7 @@ func init_grid():
 			tile.texture = base_texture
 		tile.name = "{x},{y}".format({x=i%5,y=floor(i/5)})
 		grid.add_child(tile)
-		
+
 	var current_tile: TextureRect = grid.get_node("0,2")
 	previous_tile = current_tile
 	current_tile.texture = dodder_head_left
