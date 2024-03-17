@@ -34,7 +34,7 @@ alignment = 1
 
 [node name="Nutrients Label" type="Label" parent="Nutrients Panel/Nutrients Container"]
 layout_mode = 2
-text = "Nutrients: 1000"
+text = "Nutrients: 1000/1000"
 label_settings = SubResource("LabelSettings_6g5lb")
 
 [node name="Nutrients Logo" type="TextureRect" parent="Nutrients Panel/Nutrients Container"]
@@ -58,6 +58,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Objective Container" type="HBoxContainer" parent="."]
+visible = false
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 294.0

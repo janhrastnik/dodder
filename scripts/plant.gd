@@ -149,7 +149,12 @@ func attach(d : Dodder) -> void:
 func detach() -> void:
 	sprite.modulate = Color(0.5, 0.5, 0.5)
 	is_depleted = true
-	dna_icon_instance.queue_free()
+	
+	if dna_strand != null:
+		dna_icon_instance.queue_free()
+		sprite.set_material(null)
+	
+	$Shape.disabled = true
 	
 	qte_stop()
 	start_timer.stop()
@@ -347,22 +352,35 @@ func roll_for_dna_strand():
 	var roll = rng.randi_range(1, 14)
 	if roll == 1:
 		var strand = rng.randi_range(1, 4)
-		if strand == 1:
-			# double dna
-			sprite.modulate = Color.LIME_GREEN
-			dna_strand = "double"
-		elif strand == 2:
-			# better walk
-			sprite.modulate = Color.SALMON
-			dna_strand = "walk"
-		elif strand == 3:
-			# stemrunner seeking
-			sprite.modulate = Color.CORNFLOWER_BLUE
-			dna_strand = "seek"
-		else:
-			# combo
-			sprite.modulate = Color.GOLD
-			dna_strand = "combo"
+		
+		var blue = preload("res://textures/shaders/blue_strand.gdshader")
+		var red = preload("res://textures/shaders/red_strand.gdshader")
+		var green = preload("res://textures/shaders/green_strand.gdshader")
+		var yellow = preload("res://textures/shaders/yellow_strand.gdshader")
+		
+		sprite.material = ShaderMaterial.new()
+		
+		match strand:
+			1:
+				# double dna
+				#sprite.modulate = Color.LIME_GREEN
+				sprite.material.shader = green
+				dna_strand = "double"
+			2:
+				# better walk
+				#sprite.modulate = Color.SALMON
+				sprite.material.shader = red
+				dna_strand = "walk"
+			3:
+				# stemrunner seeking
+				#sprite.modulate = Color.CORNFLOWER_BLUE
+				sprite.material.shader = blue
+				dna_strand = "seek"
+			4:
+				# combo
+				#sprite.modulate = Color.GOLD
+				sprite.material.shader = yellow
+				dna_strand = "combo"
 		
 		var dna_icon = preload("res://scenes/plants/dna_icon.tscn")
 		dna_icon_instance = dna_icon.instantiate()

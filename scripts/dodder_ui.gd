@@ -23,7 +23,7 @@ func attachable_event(is_depleted: bool):
 		info_label.text = "Press e to attach"
 
 func refresh_nutrient_count(nutrients: int):
-	get_node("Nutrients Panel/Nutrients Container/Nutrients Label").text = "Nutrients: {count}".format({count=nutrients})
+	get_node("Nutrients Panel/Nutrients Container/Nutrients Label").text = "{count}/1000".format({count=nutrients})
 
 func show_dna_strand(strand: String):
 	if strand == "double":
