@@ -10,3 +10,5 @@ http://creativecommons.org/licenses/by/4.0/
 Licensed under Creative Commons: By Attribution 4.0 License
 http://creativecommons.org/licenses/by/4.0/
  - [jsfxr](https://sfxr.me/), tool for creating sfx
+ - One sfx from the [SwishSwoosh](https://www.swish-swoosh.com/pages/game-jam-pack) free game jam sfx pack
+ - [Silkscreen](https://kottke.org/plus/type/silkscreen/) font
